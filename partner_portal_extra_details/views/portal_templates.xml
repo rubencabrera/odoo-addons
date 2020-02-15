@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_details_ficha"
+              name="Extendedn portal details"
+              inherit_id="portal.portal_my_details">
+                        <xpath expr="//label[@for='phone']/parent::div" position="after">
+                            <div t-attf-class="form-group #{error.get('gender') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="gender">Gender</label>
+                                <select name="gender" t-attf-class="form-control #{error.get('gender') and 'is-invalid' or ''}" t-att-value="gender or partner.gender">
+                                    <option value="">Categoría...</option>
+                                    <option value="male" t-att-selected="male == gender or male == partner.gender">Masculina</option>
+                                    <option value="female" t-att-selected="female == gender or female == partner.gender">Femenina</option>
+                                </select>
+                            </div>
+                            <div t-attf-class="form-group #{error.get('birthdate_date') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="birthdate_date">Fecha de nacimiento</label>
+                                <input id="birthdate_date" type="date" name="birthdate_date" class="form-control o_datepicker_input o_website_form_date" />
+                            </div>
+                        </xpath>
+    </template>
+</odoo>
