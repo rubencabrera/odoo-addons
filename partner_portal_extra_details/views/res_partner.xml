@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_rayito_form" model="ir.ui.view">
+        <field name="name">view.res.partner.form.rayito</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="partner_contact_gender.view_personal_information_gender"/>
+        <!-- <field eval="17" name="priority"/> -->
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='gender']" position="after">
+                <field name='tutor_phone'/>
+                <field name='tutor_name'/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

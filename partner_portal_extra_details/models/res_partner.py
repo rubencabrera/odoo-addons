@@ -1,15 +1,13 @@
-# Copyright 2014-2015 Grupo ESOC <www.grupoesoc.es>
-# Copyright 2017-Apertoso N.V. (<http://www.apertoso.be>)
+# Copyright 2020 Rubén Cabrera Martínez <dev@rubencabrera.es>
+# Copyright 2020 CBMP Rayito Salinero
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import fields, models
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    """Adds simple emergency contact fields"""
+    _inherit = "res.partner"
 
-    gender = fields.Selection([
-        ('male', 'Masculino'),
-        ('female', 'Femenino'),
-        ('other', 'Other')
-    ])
+    tutor_phone = fields.Integer(string="Emergency phone")
+    tutor_name = fields.Char(string="Nombre del contacto de emergencia")

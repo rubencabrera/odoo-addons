@@ -17,5 +17,7 @@
 				<input id="birthdate_date" type="date" name="birthdate_date" t-att-value="birthdate_date or partner.birthdate_date" t-attf-class="form-control #{error.get('birthdate_date') and 'is-invalid' or ''" />
                             </div>
                         </xpath>
+			<xpath expr="//label[@for='company_name']/parent::div" position="replace">
+                        </xpath>
     </template>
 </odoo>
