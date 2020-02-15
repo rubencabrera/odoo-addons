@@ -5,16 +5,16 @@
               inherit_id="portal.portal_my_details">
                         <xpath expr="//label[@for='phone']/parent::div" position="after">
                             <div t-attf-class="form-group #{error.get('gender') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label" for="gender">Gender</label>
+                                <label class="col-form-label" for="gender">Categoría</label>
                                 <select name="gender" t-attf-class="form-control #{error.get('gender') and 'is-invalid' or ''}" t-att-value="gender or partner.gender">
-                                    <option value="">Categoría...</option>
-                                    <option value="male" t-att-selected="male == gender or male == partner.gender">Masculina</option>
-                                    <option value="female" t-att-selected="female == gender or female == partner.gender">Femenina</option>
+                                    <option value="" t-att-selected="'selected' if not partner.gender else None">Categoría...</option>
+                                    <option value="female" t-att-selected="'selected' if 'female'==gender or 'female'==partner.gender else None">Femenina</option>
+                                    <option value="male" t-att-selected="'selected' if 'male'==gender or 'male'==partner.gender else None">Masculina</option>
                                 </select>
                             </div>
                             <div t-attf-class="form-group #{error.get('birthdate_date') and 'o_has_error' or ''} col-xl-6">
                                 <label class="col-form-label" for="birthdate_date">Fecha de nacimiento</label>
-                                <input id="birthdate_date" type="date" name="birthdate_date" class="form-control o_datepicker_input o_website_form_date" />
+				<input id="birthdate_date" type="date" name="birthdate_date" t-att-value="birthdate_date or partner.birthdate_date" t-attf-class="form-control #{error.get('birthdate_date') and 'is-invalid' or ''" />
                             </div>
                         </xpath>
     </template>

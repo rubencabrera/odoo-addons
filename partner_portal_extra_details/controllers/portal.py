@@ -6,22 +6,27 @@ from odoo.http import request, route
 
 class RayitoCustomerPortal(CustomerPortal):
 
-    MANDATORY_BILLING_FIELDS = [
-        "name",
-        "phone",
-        "email",
-        "street",
-        "city",
-        "country_id",
-    ]
-    OPTIONAL_BILLING_FIELDS = [
-        "zipcode",
-        "state_id",
-        "vat",
-        "company_name",
-        "gender",
-        "birthdate_date"
-    ]
+    def _get_mandatory_billing_fields(self):
+        MANDATORY_BILLING_FIELDS = [
+            "name",
+            "phone",
+            "email",
+            "street",
+            "city",
+            "country_id",
+            "gender",
+            "birthdate_date",
+        ]
+        return MANDATORY_BILLING_FIELDS
+
+    def _get_optional_billing_fields(self):
+        OPTIONAL_BILLING_FIELDS = [
+            "zipcode",
+            "state_id",
+            "vat",
+            "company_name",
+        ]
+        return OPTIONAL_BILLING_FIELDS
 
     @route(['/my/account'], type='http', auth='user', website=True)
     def account(self, redirect=None, **post):
@@ -38,11 +43,13 @@ class RayitoCustomerPortal(CustomerPortal):
             values.update(post)
             if not error:
                 values = {
-                    key: post[key] for key in self.MANDATORY_BILLING_FIELDS}
+                    key: post[key]
+                    for key in self._get_mandatory_billing_fields()}
                 values.update(
                     {
                         key: post[key]
-                        for key in self.OPTIONAL_BILLING_FIELDS if key in post
+                        for key in self._get_optional_billing_fields()
+                        if key in post
                     }
                 )
                 values.update({'zip': values.pop('zipcode', '')})
