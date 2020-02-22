@@ -9,5 +9,5 @@ class ResPartner(models.Model):
     """Adds simple emergency contact fields"""
     _inherit = "res.partner"
 
-    tutor_phone = fields.Integer(string="Emergency phone")
+    tutor_phone = fields.Char(string="Emergency phone")
     tutor_name = fields.Char(string="Nombre del contacto de emergencia")

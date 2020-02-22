@@ -4,6 +4,14 @@
               name="Extendedn portal details"
               inherit_id="portal.portal_my_details">
                         <xpath expr="//label[@for='phone']/parent::div" position="after">
+                            <div t-attf-class="form-group #{error.get('tutor_phone') and 'o_has_error' or ''} col-xl-6">
+				<label class="col-form-label" for="tutor_phone">Teléfono de emergencia</label>
+                                <input id="tutor_phone" type="tel" name="tutor_phone" t-attf-class="form-control #{error.get('tutor_phone') and 'is-invalid' or ''}" t-att-value="tutor_phone or partner.tutor_phone"/>
+                            </div>
+                            <div t-attf-class="form-group #{error.get('tutor_name') and 'o_has_error' or ''} col-xl-6">
+				<label class="col-form-label" for="tutor_name">Nombre del contacto de emergencia</label>
+                                <input id="tutor_name" type="tel" name="tutor_name" t-attf-class="form-control #{error.get('tutor_name') and 'is-invalid' or ''}" t-att-value="tutor_name or partner.tutor_name"/>
+                            </div>
                             <div t-attf-class="form-group #{error.get('gender') and 'o_has_error' or ''} col-xl-6">
                                 <label class="col-form-label" for="gender">Categoría</label>
                                 <select name="gender" t-attf-class="form-control #{error.get('gender') and 'is-invalid' or ''}" t-att-value="gender or partner.gender">
@@ -14,7 +22,11 @@
                             </div>
                             <div t-attf-class="form-group #{error.get('birthdate_date') and 'o_has_error' or ''} col-xl-6">
                                 <label class="col-form-label" for="birthdate_date">Fecha de nacimiento</label>
+<<<<<<< Updated upstream
 				<input id="birthdate_date" type="date" name="birthdate_date" t-att-value="birthdate_date or partner.birthdate_date" t-attf-class="form-control #{error.get('birthdate_date') and 'is-invalid' or ''" />
+=======
+				<input id="birthdate_date" type="date" name="birthdate_date" t-attf-class="form-control #{error.get('birthdate_date') and 'is-invalid' or ''} o_datepicker_input o_website_form_date" t-att-value="birthdate_date or partner.birthdate_date"/>
+>>>>>>> Stashed changes
                             </div>
                         </xpath>
 			<xpath expr="//label[@for='company_name']/parent::div" position="replace">

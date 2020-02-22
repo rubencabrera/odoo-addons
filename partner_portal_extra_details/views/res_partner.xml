@@ -4,10 +4,9 @@
         <field name="name">view.res.partner.form.rayito</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="partner_contact_gender.view_personal_information_gender"/>
-        <!-- <field eval="17" name="priority"/> -->
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='gender']" position="after">
-                <field name='tutor_phone'/>
+            <xpath expr="//field[@name='email']" position="after">
+                <field name='tutor_phone' widget="phone"/>
                 <field name='tutor_name'/>
             </xpath>
         </field>
