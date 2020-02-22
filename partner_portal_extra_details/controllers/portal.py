@@ -6,27 +6,46 @@ from odoo.http import request, route
 
 class RayitoCustomerPortal(CustomerPortal):
 
+    MANDATORY_BILLING_FIELDS = [
+        "birthdate_date",
+        "city",
+        "country_id",
+        "email",
+        "gender",
+        "name",
+        "phone",
+        "street",
+        "tutor_phone",
+        "tutor_name",
+        "vat",
+    ]
+    OPTIONAL_BILLING_FIELDS = [
+        "company_name",
+        "state_id",
+        "zipcode",
+    ]
+
     def _get_mandatory_billing_fields(self):
         MANDATORY_BILLING_FIELDS = [
-            "name",
-            "phone",
-            "email",
-            "street",
+            "birthdate_date",
             "city",
             "country_id",
+            "email",
             "gender",
-            "birthdate_date",
+            "name",
+            "phone",
+            "street",
             "tutor_phone",
             "tutor_name",
+            "vat",
         ]
         return MANDATORY_BILLING_FIELDS
 
     def _get_optional_billing_fields(self):
         OPTIONAL_BILLING_FIELDS = [
-            "zipcode",
-            "state_id",
-            "vat",
             "company_name",
+            "state_id",
+            "zipcode",
         ]
         return OPTIONAL_BILLING_FIELDS
 
