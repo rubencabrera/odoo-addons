@@ -6,7 +6,6 @@ from odoo.http import request, route
 
 class RayitoCustomerPortal(CustomerPortal):
 
-<<<<<<< Updated upstream
     def _get_mandatory_billing_fields(self):
         MANDATORY_BILLING_FIELDS = [
             "name",
@@ -17,6 +16,8 @@ class RayitoCustomerPortal(CustomerPortal):
             "country_id",
             "gender",
             "birthdate_date",
+            "tutor_phone",
+            "tutor_name",
         ]
         return MANDATORY_BILLING_FIELDS
 
@@ -28,26 +29,6 @@ class RayitoCustomerPortal(CustomerPortal):
             "company_name",
         ]
         return OPTIONAL_BILLING_FIELDS
-=======
-    MANDATORY_BILLING_FIELDS = [
-        "name",
-        "phone",
-        "email",
-        "street",
-        "city",
-        "country_id",
-        "tutor_phone",
-        "tutor_name",
-    ]
-    OPTIONAL_BILLING_FIELDS = [
-        "zipcode",
-        "state_id",
-        "vat",
-        "company_name",
-        "gender",
-        "birthdate_date"
-    ]
->>>>>>> Stashed changes
 
     @route(['/my/account'], type='http', auth='user', website=True)
     def account(self, redirect=None, **post):
