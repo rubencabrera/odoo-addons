@@ -29,7 +29,7 @@
                         </xpath>
 			<xpath expr="//label[@for='vat']/parent::div" position="replace">
                             <div t-attf-class="form-group #{error.get('vat') and 'o_has_error' or ''} col-xl-6">
-				<label class="col-form-label" for="vat">DNI</label>
+				<label class="col-form-label" for="vat" placeholder="01234567Z">DNI</label>
                                 <input type="text" name="vat" t-attf-class="form-control #{error.get('vat') and 'is-invalid' or ''}" t-att-value="vat or partner.vat"/>
                             </div>
                         </xpath>
