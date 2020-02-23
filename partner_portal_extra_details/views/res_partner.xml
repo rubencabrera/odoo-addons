@@ -11,4 +11,16 @@
             </xpath>
         </field>
     </record>
+
+    <record id="view_partner_rayito_tree" model="ir.ui.view">
+        <field name="name">view.res.partner.tree.rayito</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_name']" position="after">
+                <field name='birthdate_date'/>
+                <field name='vat'/>
+            </xpath>
+        </field>
+    </record>
 </odoo>
