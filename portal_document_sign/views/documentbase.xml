@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <!-- Form view -->
+    <record id="view_documentbase_form" model="ir.ui.view">
+        <field name="name">view.documentbase.form</field>
+        <field name="model">documentbase</field>
+        <field name="arch" type="xml">
+            <form string="Base Document">
+                <sheet>
+                    <group>
+                        <field name="name">Name</field>
+                        <field name="text" widget="html"/>
+                        <field name="date_start"/>
+                        <field name="date_valid"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Form action -->
+    <record id="action_documentbase_form" model="ir.actions.act_window">
+        <field name="name">Documentos base</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">documentbase</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="search_view_id" ref="view_documentbase_filter"/> -->
+    </record>
+    <!-- Tree view -->
+    <record id='documentbase_view_tree' model='ir.ui.view'>
+        <field name="name">documentbase.view.tree</field>
+        <field name="model">documentbase</field>
+        <field name="arch" type="xml">
+            <tree string="Base Documents">
+                <field name="name"/>
+                <field name="date_start"/>
+                <field name="date_valid"/>
+            </tree>
+        </field>
+    </record>
+    <!-- <record id="view_documentbase_filter" model="ir.ui.view"> -->
+        <!-- <field name="name">documentbase.filter</field> -->
+        <!-- <field name="model">documentbase</field> -->
+        <!-- <field name="arch" type="xml"> -->
+            <!-- <search string="Documentos Base"> -->
+                <!-- <field name="name" string="Nombre" filter_domain="[('name','ilike', self)]"/> -->
+            <!-- </search> -->
+        <!-- </field> -->
+    <!-- </record> -->
+
+    <!-- <record id="action_documentbase" model="ir.actions.act_window"> -->
+        <!-- <field name="name">Documentos Base</field> -->
+        <!-- <field name="type">ir.actions.act_window</field> -->
+        <!-- <field name="res_model">documentbase</field> -->
+        <!-- <field name="view_type">form</field> -->
+        <!-- <field name="view_mode">tree,form</field> -->
+        <!-- <field name="search_view_id" ref="view_documentbase_filter"/> -->
+        <!-- <field name="help" type="html"> -->
+          <!-- <p class="o_view_nocontent_smiling_face"> -->
+            <!-- Crea documentos base para autorizaciones -->
+          <!-- </p> -->
+        <!-- </field> -->
+    <!-- </record> -->
+
+    <record id="action_documentbase_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="documentbase_view_tree"/>
+        <field name="act_window_id" ref="action_documentbase_form"/>
+    </record>
+
+    <record id="action_documentbase_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_documentbase_form"/>
+        <field name="act_window_id" ref="action_documentbase_form"/>
+    </record>
+
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="portal_document_sign.action_window">
+      <field name="name">Documentos base</field>
+      <field name="res_model">documentbase</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+   
+
+    <!-- Menu entry -->
+    <menuitem name="Autorizaciones"
+        id="menu_agreements"
+        parent="contacts.menu_contacts"
+        groups="base.group_user,base.group_partner_manager"
+        />
+
+    <menuitem name="Documentos Base"
+        id="menu_documentbase"
+        parent="menu_agreements"
+        action="portal_document_sign.action_window"
+        />
+    <!-- actions -->
+    
+    <!-- <menuitem name="List" id="portal_document_sign.menu_1_list" parent="portal_document_sign.menu_documentbase" -->
+        <!-- action="portal_document_sign.action_window" -->
+        <!-- /> -->
+    <!-- <menuitem name="Server to list" id="andamiaje" parent="andamiaje.menu_2" -->
+              <!-- action="andamiaje.action_server"/> -->
+   
+    </data>
+</odoo>

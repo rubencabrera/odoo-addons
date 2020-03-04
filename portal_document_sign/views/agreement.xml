@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <!-- Form view -->
+    <record id="view_agreement_form" model="ir.ui.view">
+        <field name="name">view.agreement.form</field>
+        <field name="model">agreement</field>
+        <field name="arch" type="xml">
+            <form string="Autorizaciones">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                        <field name="documentbase_id"/>
+                        <field name="sign_name"/>
+                        <field name="sign_legal"/>
+                        <field name="signature" widget="signature"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Form action -->
+    <record id="action_agreement_form" model="ir.actions.act_window">
+        <field name="name">Autorización</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">agreement</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="search_view_id" ref="view_documentbase_filter"/> -->
+    </record>
+    <!-- Tree view -->
+    <record id='agreement_view_tree' model='ir.ui.view'>
+        <field name="name">agreement.view.tree</field>
+        <field name="model">agreement</field>
+        <field name="arch" type="xml">
+            <tree string="Autorizaciones">
+                <field name="partner_id"/>
+                <field name="documentbase_id"/>
+                <field name="signature"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_agreement_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="agreement_view_tree"/>
+        <field name="act_window_id" ref="action_agreement_form"/>
+    </record>
+
+    <record id="action_agreement_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_agreement_form"/>
+        <field name="act_window_id" ref="action_agreement_form"/>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="portal_document_sign.agreement_window">
+      <field name="name">Autorizaciones</field>
+      <field name="res_model">agreement</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+   
+
+    <!-- Menu entry -->
+    <!-- Con superuser lo veo -->
+    <menuitem name="Autorizaciones"
+        id="menu_agreement_list"
+        parent="menu_agreements"
+        action="portal_document_sign.agreement_window"
+        groups="base.group_user,base.group_partner_manager"
+        />
+    </data>
+</odoo>
