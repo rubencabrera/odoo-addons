@@ -20,7 +20,12 @@
         "partner_contact_gender",
     ],
     "data": [
+        #datas
+        "data/product_template_data.xml",
+        #views
         "views/portal_templates.xml",
         "views/res_partner.xml",
+        #wizard
+        "wizard/automatic_partner_invoice.xml",
     ],
 }
