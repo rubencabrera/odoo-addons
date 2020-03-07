@@ -6,7 +6,10 @@
               inherit_id="portal.portal_breadcrumbs"
               priority="60">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
-            <t class="breadcrumb-item active">Autorizaciones</t>
+            <li t-if="page_name == 'agreement'" t-attf-class="breadcrumb-item #{'active ' if not agreement else ''}">
+                <a t-if="agreement" t-attf-href="/my/agreements?{{ keep_query() }}">Autorizaciones</a>
+                <t t-else="">Autorizaciones</t>
+            </li>
         </xpath>
     </template>
     <!-- Menu entry in my home -->
@@ -15,7 +18,7 @@
             <t t-if="agreement_count" t-call="portal.portal_docs_entry">
                 <t t-set="title">Autorizaciones</t>
                 <t t-set="url" t-value="'/my/agreements'"/>
-                <t t-set="count" t-value="invoice_count"/>
+                <t t-set="count" t-value="agreement_count"/>
             </t>
         </xpath>
     </template>
@@ -28,15 +31,13 @@
         <t t-call="portal.portal_searchbar">
             <t t-set="title">Autorizaciones</t>
         </t>
-        <t t-if="not invoices">
+        <t t-if="not agreements">
             <p>No tienes ninguna autorización firmada ni pendiente de firmar para esta temporada</p>
         </t>
-        <t t-if="invoices" t-call="portal.portal_table">
+        <t t-if="agreements" t-call="portal.portal_table">
             <thead>
                 <tr class="active">
                     <th>Documento</th>
-                    <th>Fecha de inicio</th>
-                    <th class='d-none d-md-table-cell'>Fecha de finalización</th>
                     <th/>
                     <th class="text-right">Firmada</th>
                 </tr>
@@ -45,25 +46,18 @@
                 <t t-foreach="agreements" t-as="agreement">
                     <tr>
                         <td>
-                            <a t-att-href="invoice.get_portal_url()" t-att-title="invoice.number">
-                                <t t-esc="invoice.number" t-if="invoice.number"/>
-                                <em t-else="">Draft Invoice</em>
+                            <a t-att-href="agreement.get_portal_url()" t-att-title="agreement.name">
+                                <t t-esc="agreement.name"/>
                             </a>
                         </td>
-                        <td><span t-field="invoice.date_invoice"/></td>
-                        <td class='d-none d-md-table-cell'><span t-field="invoice.date_due"/></td>
                         <td class="tx_status">
-                            <t t-if="invoice.state == 'open'">
-                                <span class="badge badge-pill badge-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> Waiting for Payment</span></span>
+                            <t t-if="agreement.signature is False">
+                                <span class="badge badge-pill badge-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Pendiente" role="img"></i><span class="d-none d-md-inline">Pendiente de firmar</span></span>
                             </t>
-                            <t t-if="invoice.state == 'paid'">
-                                <span class="badge badge-pill badge-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Paid" role="img"></i><span class="d-none d-md-inline"> Paid</span></span>
-                            </t>
-                            <t t-if="invoice.state == 'cancel'">
-                                <span class="badge badge-pill badge-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelled</span></span>
+                            <t t-if="agreement.signature is True">
+                                <span class="badge badge-pill badge-success"><i class="fa fa-fw fa-check" aria-label="Paid" title="Firmada" role="img"></i><span class="d-none d-md-inline">Firmada</span></span>
                             </t>
                         </td>
-                        <td class="text-right"><span t-esc="-invoice.residual if invoice.type == 'out_refund' else invoice.residual" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
                     </tr>
                 </t>
             </tbody>

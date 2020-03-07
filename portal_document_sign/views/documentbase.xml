@@ -91,12 +91,14 @@
         id="menu_agreements"
         parent="contacts.menu_contacts"
         groups="base.group_user,base.group_partner_manager"
+        sequence="4"
         />
 
     <menuitem name="Documentos Base"
         id="menu_documentbase"
         parent="menu_agreements"
         action="portal_document_sign.action_window"
+        sequence="10"
         />
     <!-- actions -->
     

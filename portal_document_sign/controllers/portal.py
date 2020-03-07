@@ -1,96 +1,87 @@
 # -*- coding: utf-8 -*-
 
-from odoo.addons.portal.controllers.portal import CustomerPortal
+from odoo.addons.portal.controllers.portal import (
+    CustomerPortal, pager as portal_pager)
 from odoo.http import request, route
+from odoo import _
 
 
-class RayitoCustomerPortal(CustomerPortal):
+class AgreementPortal(CustomerPortal):
 
-    MANDATORY_BILLING_FIELDS = [
-        "birthdate_date",
-        "city",
-        "country_id",
-        "email",
-        "gender",
-        "name",
-        "phone",
-        "street",
-        "tutor_phone",
-        "tutor_name",
-        "vat",
-    ]
-    OPTIONAL_BILLING_FIELDS = [
-        "company_name",
-        "state_id",
-        "zipcode",
-    ]
+    def _prepare_portal_layout_values(self):
+        values = super(AgreementPortal, self)._prepare_portal_layout_values()
+        agreement_count = request.env['agreement'].search_count([])
+        values['agreement_count'] = agreement_count
+        return values
 
-    def _get_mandatory_billing_fields(self):
-        MANDATORY_BILLING_FIELDS = [
-            "birthdate_date",
-            "city",
-            "country_id",
-            "email",
-            "gender",
-            "name",
-            "phone",
-            "street",
-            "tutor_phone",
-            "tutor_name",
-            "vat",
-        ]
-        return MANDATORY_BILLING_FIELDS
+    # ------------------------------------------------------------
+    # My Agreements
+    # ------------------------------------------------------------
 
-    def _get_optional_billing_fields(self):
-        OPTIONAL_BILLING_FIELDS = [
-            "company_name",
-            "state_id",
-            "zipcode",
-        ]
-        return OPTIONAL_BILLING_FIELDS
+    def _agreement_get_page_view_values(
+            self, agreement, access_token, **kwargs):
+        values = {
+            'page_name': 'agreement',
+            'agreement': agreement,
+        }
+        # TODO: en lo del history no estoy nada seguro
+        return self._get_page_view_values(
+            agreement,
+            access_token,
+            values,
+            'my_agreement_history', False, **kwargs)
 
-    @route(['/my/account'], type='http', auth='user', website=True)
-    def account(self, redirect=None, **post):
+    @route(
+        ['/my/agreements', '/my/agreements/page/<int:page>'],
+        type='http', auth="user", website=True)
+    def portal_my_agreements(
+            self, page=1, sortby=None, **kw):
         values = self._prepare_portal_layout_values()
-        partner = request.env.user.partner_id
+        Agreement = request.env['agreement']
+
+        domain = []
+
+        searchbar_sortings = {
+            'name': {'label': _('Autorización'), 'order': 'name desc'},
+            'documentbase_id': {
+                'label': _('Documento'), 'order': 'documentbase'},
+        }
+        # default sort by order
+        if not sortby:
+            sortby = 'name'
+        order = searchbar_sortings[sortby]['order']
+
+        # TODO: esto no lo tengo nada claro
+        archive_groups = self._get_archive_groups('agreement', domain)
+
+        # count for pager
+        agreement_count = Agreement.search_count(domain)
+        # pager
+        pager = portal_pager(
+            url="/my/agreements",
+            url_args={
+                'sortby': sortby
+            },
+            total=agreement_count,
+            page=page,
+            step=self._items_per_page
+        )
+        # content according to pager and archive selected
+        agreements = Agreement.search(
+            domain,
+            order=order,
+            limit=self._items_per_page,
+            offset=pager['offset']
+        )
+        request.session['my_agreements_history'] = agreements.ids[:100]
         values.update({
-            'error': {},
-            'error_message': [],
+            'agreements': agreements,
+            'page_name': 'agreement',
+            'pager': pager,
+            'archive_groups': archive_groups,
+            'default_url': '/my/agreements',
+            'searchbar_sortings': searchbar_sortings,
+            'sortby': sortby,
         })
-
-        if post:
-            error, error_message = self.details_form_validate(post)
-            values.update({'error': error, 'error_message': error_message})
-            values.update(post)
-            if not error:
-                values = {
-                    key: post[key]
-                    for key in self._get_mandatory_billing_fields()}
-                values.update(
-                    {
-                        key: post[key]
-                        for key in self._get_optional_billing_fields()
-                        if key in post
-                    }
-                )
-                values.update({'zip': values.pop('zipcode', '')})
-                partner.sudo().write(values)
-                if redirect:
-                    return request.redirect(redirect)
-                return request.redirect('/my/home')
-
-        countries = request.env['res.country'].sudo().search([])
-        states = request.env['res.country.state'].sudo().search([])
-
-        values.update({
-            'partner': partner,
-            'countries': countries,
-            'states': states,
-            'has_check_vat': hasattr(request.env['res.partner'], 'check_vat'),
-            'redirect': redirect,
-            'page_name': 'my_details',
-        })
-
-        response = request.render("portal.portal_my_details", values)
-        response.headers['X-Frame-Options'] = 'DENY'
-        return response
+        return request.render(
+            "portal_document_sign.portal_my_agreements", values)

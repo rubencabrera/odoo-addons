@@ -37,6 +37,8 @@
             <tree string="Autorizaciones">
                 <field name="partner_id"/>
                 <field name="documentbase_id"/>
+                <field name="sign_name"/>
+                <field name="sign_legal"/>
                 <field name="signature"/>
             </tree>
         </field>
@@ -65,12 +67,12 @@
    
 
     <!-- Menu entry -->
-    <!-- Con superuser lo veo -->
     <menuitem name="Autorizaciones"
         id="menu_agreement_list"
         parent="menu_agreements"
         action="portal_document_sign.agreement_window"
         groups="base.group_user,base.group_partner_manager"
+        sequence="20"
         />
     </data>
 </odoo>

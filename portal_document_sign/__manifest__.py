@@ -21,7 +21,7 @@
     "data": [
         "views/documentbase.xml",
         "views/agreement.xml",
+        "views/portal_templates.xml",
         "security/ir.model.access.csv",
-        #  "views/res_partner.xml",
     ],
 }
