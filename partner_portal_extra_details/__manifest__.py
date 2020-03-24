@@ -18,6 +18,8 @@
         "partner_contact_personal_information_page",
         "partner_contact_birthdate",
         "partner_contact_gender",
+        "product",
+        "l10n_es",
     ],
     "data": [
         #datas
