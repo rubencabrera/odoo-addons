@@ -18,9 +18,16 @@
         "partner_contact_personal_information_page",
         "partner_contact_birthdate",
         "partner_contact_gender",
+        "product",
+        "l10n_es",
     ],
     "data": [
+        #datas
+        "data/product_template_data.xml",
+        #views
         "views/portal_templates.xml",
         "views/res_partner.xml",
+        #wizard
+        "wizard/automatic_partner_invoice.xml",
     ],
 }

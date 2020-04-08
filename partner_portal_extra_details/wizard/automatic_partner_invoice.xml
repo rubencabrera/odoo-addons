@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_automatic_partner_invoice" model="ir.ui.view">
+            <field name="name">Automatic Partner Invoice</field>
+            <field name="model">automatic.partner.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Automatic Invoice">
+                    <separator string="Automatic Invoice"/>
+                    <group>
+                        <span class="o_form_label">Facturas automáticas para los clientes seleccionados...</span>
+                    </group>
+                    <footer>
+                        <div>
+                            <button name="create_automatic_invoice"
+                                    string="Automatic Invoice"
+                                    type="object"
+                                    class="btn-primary"/>
+                            <button special="cancel"
+                                    string="Cancel"
+                                    class="btn-secondary"/>
+                        </div>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window
+            id="action_partner_automatic_invoice"
+            res_model="automatic.partner.invoice"
+            src_model="res.partner"
+            target="new"
+            multi="True"
+            key2="client_action_multi"
+            view_mode="form"
+            name="Automatic Invoice"/>
+
+    </data>
+</odoo>
