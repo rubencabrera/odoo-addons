@@ -18,8 +18,10 @@
         "partner_contact_personal_information_page",
         "partner_contact_birthdate",
         "partner_contact_gender",
+        "account",
     ],
     "data": [
+        "data/mail_template_data.xml",
         "views/portal_templates.xml",
         "views/res_partner.xml",
     ],
