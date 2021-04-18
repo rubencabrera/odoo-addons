@@ -15,8 +15,7 @@ class AccountInvoice(models.Model):
 
     def _send_mail_to_new_partner(self, template):
         self.ensure_one()
-        user = self.env.uid
-        mail = template.send_mail(self.id, force_send=True)
+        template.send_mail(self.id, force_send=True)
 
     def _get_payment_term_template(self):
 

@@ -11,6 +11,7 @@
             </xpath>
             <xpath expr="//field[@name='vat']" position="after">
                 <field name='validate_portal_user' />
+                <field name='valid_receipt' />
             </xpath>
         </field>
     </record>

@@ -16,11 +16,17 @@ class ResPartner(models.Model):
         string="Validate portal user",
         help="Allows to validate the user registered in the portal."
     )
+    valid_receipt = fields.Boolean(
+        string="Validate receipt",
+        help="Allows to validate the attachment receipt."
+    )
 
     @api.multi
     def write(self, values):
         if values.get('validate_portal_user'):
             self._send_mail_to_new_validate_user()
+        if values.get('valid_receipt'):
+            self._send_validate_mail()
         return super(ResPartner, self).write(values)
 
     @api.multi
@@ -88,3 +94,13 @@ class ResPartner(models.Model):
             'invoice_line_tax_ids': [(6, 0, [product.taxes_id.id])],
         })]
         return values
+
+    def _send_validate_mail(self):
+        self.ensure_one()
+        partner = self
+        module_name = 'partner_portal_extra_details'
+        template = self.env.ref(
+            "%s.email_template_send_user_valid_receipt" % module_name
+        )
+        template.send_mail(partner.id, force_send=True)
+
