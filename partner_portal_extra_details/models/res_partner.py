@@ -16,10 +16,6 @@ class ResPartner(models.Model):
         string="Validate portal user",
         help="Allows to validate the user registered in the portal."
     )
-    product_id = fields.Many2one(
-        comodel_name="product.product",
-        string="Service to invoice"
-    )
 
     @api.multi
     def write(self, values):
@@ -75,7 +71,7 @@ class ResPartner(models.Model):
 
     def _prepare_invoice_line_values(self):
         self.ensure_one()
-        product = self.product_id
+        product = self.company_id.product_id
         if not product:
             raise UserError(
                 _('You must select the service to create invoice.')

@@ -24,5 +24,6 @@
         "data/mail_template_data.xml",
         "views/portal_templates.xml",
         "views/res_partner.xml",
+        "views/res_company_views.xml",
     ],
 }
