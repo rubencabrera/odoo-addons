@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_company_product_service_inherit_form" model="ir.ui.view">
+        <field name="name">view.res.company.product.service.inherit.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page" position="after">
+                <page string="Other information" name="page_other_information">
+                    <group>
+                        <group>
+                            <field name="product_id" domain="[('type','=', 'service')]"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
