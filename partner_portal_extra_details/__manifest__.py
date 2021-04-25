@@ -18,13 +18,10 @@
         "partner_contact_personal_information_page",
         "partner_contact_birthdate",
         "partner_contact_gender",
-<<<<<<< Updated upstream
-=======
         "account",
         "portal",
         "product",
-        "l10n_es"
->>>>>>> Stashed changes
+        "l10n_es",
     ],
     "data": [
         "views/portal_templates.xml",
