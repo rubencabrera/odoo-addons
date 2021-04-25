@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import base64
 from odoo.addons.portal.controllers.portal import CustomerPortal
 from odoo.http import request, route
 
@@ -92,5 +93,40 @@ class RayitoCustomerPortal(CustomerPortal):
         })
 
         response = request.render("portal.portal_my_details", values)
+        response.headers['X-Frame-Options'] = 'DENY'
+        return response
+
+    @route(['/my/receipt'], type='http', auth='user', website=True)
+    def receipt(self, redirect=None, **post):
+        values = self._prepare_portal_layout_values()
+        partner = request.env.user.partner_id
+        values.update({
+            'error': {},
+            'error_message': [],
+        })
+        if post.get('attachment', False):
+            Attachment = request.env['ir.attachment']
+            name = post.get('attachment').filename
+            file = post.get('attachment')
+            data = file.read()
+            attachment = Attachment.sudo().create({
+                'name': name,
+                'datas_fname': name,
+                'res_name': name,
+                'type': 'binary',
+                'res_model': 'res.partner',
+                'res_id': partner.id,
+                'datas': base64.b64encode(data)
+            })
+            if not attachment:
+
+            values.update({
+                'attachment': attachment
+            })
+            return request.redirect('/my')
+        response = request.render(
+            "partner_portal_extra_details.portal_my_details_receipt_payment",
+            values
+        )
         response.headers['X-Frame-Options'] = 'DENY'
         return response

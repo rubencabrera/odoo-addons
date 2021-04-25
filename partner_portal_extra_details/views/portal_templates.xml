@@ -34,4 +34,53 @@
                             </div>
                         </xpath>
     </template>
+
+     <template id="portal_my_details_receipt_payment">
+        <t t-call="portal.portal_layout">
+            <t t-set="additional_title">Adjunta el justificante de pago</t>
+            <h3>Justificante de pago</h3>
+            <form action="/my/receipt" method="post" class="s_website_form form-horizontal container-fluid mt32" enctype="multipart/form-data" id="file_upload_receipt_form">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <div class="row o_portal_receipt">
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-12">
+                              <div t-if="error_message" class="alert alert-danger" role="alert">
+                                  <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                              </div>
+                            </div>
+                            <div t-attf-class="form-group #{error.get('name') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="name">Subir Justificante</label>
+                                <input type="file"
+                                       name="attachment"
+                                       class="file"
+                                       multiple="true"
+                                       data-show-upload="true"
+                                       data-show-caption="true"
+                                       data-show-preview="true"
+                                       lass="file"
+                                />
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <button type="submit" name="Upload" class="btn btn-primary float-right mb32 ">
+                                Send
+                                <span class="fa fa-long-arrow-right" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </t>
+     </template>
+
+    <template id="portal_layout_receipt_payment" name="Portal layout: Attach receipt payment" inherit_id="portal.portal_layout" priority="40">
+        <xpath expr="//div[hasclass('o_portal_my_details')]" position="inside">
+            <div t-if="not user_id.partner_id.valid_receipt">
+                <hr class="mt-1 mb-0"/>
+                <h6><strong>Adjunta el justificante de pago</strong></h6>
+                <a style="color: green; font-size: 30;" role="button" href="/my/receipt" class="btn btn-sm btn-link"><i class="fa fa-plus-circle"/>Subir Justificante</a>
+            </div>
+        </xpath>
+    </template>
 </odoo>
