@@ -22,9 +22,18 @@
         "portal",
         "product",
         "l10n_es",
+        "product",
+        "l10n_es"
     ],
     "data": [
+        #datas
+        "data/product_template_data.xml",
+        "data/mail_template_data.xml",
+        #views
         "views/portal_templates.xml",
         "views/res_partner.xml",
+        "views/res_company_views.xml",
+        #wizard
+        "wizard/automatic_partner_invoice.xml",
     ],
 }
