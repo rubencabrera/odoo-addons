@@ -1,0 +1,26 @@
+{
+  "name": "odoo-addons",
+	"description": "Odoo extra addons",
+	"scripts": {
+		"semantic-release": "semantic-release"
+	},
+	"devDependencies": {
+	  "semantic-release": "17.4.2",
+		"@semantic-release/commit-analyzer": "8.0.1",
+		"@semantic-release/git": "9.0.0"
+	},
+	"release": {
+	  "branch": "12.0",
+		"repositoryUrl": "https://github.com/rubencabrera/odoo-addons.git",
+		"tagFormat": "${version}",
+		"plugins": {
+		  "@semantic-release/commit-analyzer": "8.0.1",
+			"@semantic-release/git": "9.0.0"
+		}
+	},
+	"keywords": [
+		"odoo"
+	],
+	"author": "Rubén Cabrera Martínez",
+	"license": "LGPL-3.0"
+}
