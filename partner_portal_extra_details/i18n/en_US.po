@@ -1,0 +1,60 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* partner_portal_extra_details
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-26 18:04+0000\n"
+"PO-Revision-Date: 2021-04-26 18:04+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,help:partner_portal_extra_details.field_res_partner__attach_receipt
+#: model:ir.model.fields,help:partner_portal_extra_details.field_res_users__attach_receipt
+msgid "Allows to know if the user has attached the receipt of payment."
+msgstr "Permite saber si el usuario ha adjuntado el recibo de pago."
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,help:partner_portal_extra_details.field_res_partner__valid_receipt
+#: model:ir.model.fields,help:partner_portal_extra_details.field_res_users__valid_receipt
+msgid "Allows to validate the attachment receipt."
+msgstr "Permite validar el comprobante de adjunto"
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,help:partner_portal_extra_details.field_res_partner__validate_portal_user
+#: model:ir.model.fields,help:partner_portal_extra_details.field_res_users__validate_portal_user
+msgid "Allows to validate the user registered in the portal."
+msgstr "Permite validar al usuario registrado en el portal."
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_partner__attach_receipt
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_users__attach_receipt
+msgid "Attach receipt"
+msgstr "Recibo Adjunto"
+
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_partner__validate_portal_user
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_users__validate_portal_user
+msgid "Validate portal user"
+msgstr "Validar usuario del portal"
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_partner__valid_receipt
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_users__valid_receipt
+msgid "Validate receipt"
+msgstr "Validar recibo"
+
+#. module: partner_portal_extra_details
+#: code:addons/partner_portal_extra_details/models/res_partner.py:86
+#, python-format
+msgid "You must select the service to create invoice."
+msgstr "Debe seleccionar el servicio para crear factura."
+
