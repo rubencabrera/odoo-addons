@@ -19,6 +19,10 @@ class ResPartner(models.Model):
         string="Validate receipt",
         help="Allows to validate the attachment receipt."
     )
+    attach_receipt = fields.Boolean(
+        string="Attach receipt",
+        help="Allows to know if the user has attached the receipt of payment."
+    )
 
     @api.multi
     def write(self, values):
