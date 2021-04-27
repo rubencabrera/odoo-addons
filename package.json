@@ -11,6 +11,7 @@
 	},
 	"release": {
     "branches": ["12.x"],
+		"debug": true,
 		"repositoryUrl": "https://github.com/rubencabrera/odoo-addons.git",
 		"tagFormat": "${version}",
 		"plugins": {
