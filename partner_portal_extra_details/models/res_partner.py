@@ -19,6 +19,10 @@ class ResPartner(models.Model):
         string="Validate receipt",
         help="Allows to validate the attachment receipt."
     )
+    attach_receipt = fields.Boolean(
+        string="Attach receipt",
+        help="Allows to know if the user has attached the receipt of payment."
+    )
 
     @api.multi
     def write(self, values):
@@ -102,8 +106,6 @@ class ResPartner(models.Model):
             "%s.email_template_send_user_valid_receipt" % module_name
         )
         template.send_mail(partner.id, force_send=True)
-
-=======
 
     @api.multi
     def create_partner_invoice(self, partner_ids):

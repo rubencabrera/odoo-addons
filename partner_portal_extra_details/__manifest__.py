@@ -19,8 +19,9 @@
         "partner_contact_birthdate",
         "partner_contact_gender",
         "account",
+        "portal",
         "product",
-        "l10n_es"
+        "l10n_es",
     ],
     "data": [
         #datas
