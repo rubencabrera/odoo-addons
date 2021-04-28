@@ -22,8 +22,6 @@
         "portal",
         "product",
         "l10n_es",
-        "product",
-        "l10n_es"
     ],
     "data": [
         #datas
