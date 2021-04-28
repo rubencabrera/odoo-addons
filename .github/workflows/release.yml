@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - master
-      - 12.x
+      - 12.0
 jobs:
   release:
     name: Release
@@ -14,6 +14,11 @@ jobs:
         with:
           fetch-depth: 0
       - name: Semantic Release
+        id: semantic
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: cycjimmy/semantic-release-action@v2
+        with:
+          extra_plugins: |
+            @semantic-release/commit-analyzer
+            @semantic-release/git
