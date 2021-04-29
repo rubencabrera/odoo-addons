@@ -5,10 +5,44 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
+
 class ResPartner(models.Model):
     """Adds simple emergency contact fields"""
     _inherit = "res.partner"
 
+    attach_receipt = fields.Boolean(
+        string="Attach receipt",
+        help="Allows to know if the user has attached the receipt of payment."
+    )
+
+    shirt_size = fields.Selection(
+        string="Talla de camiseta",
+        selection=[
+            ("4", "4"),
+            ("8", "8"),
+            ("12", "12"),
+            ("xs", "XS"),
+            ("s", "S"),
+            ("m", "M"),
+            ("l", "L"),
+            ("xl", "XL"),
+            ("xxl", "XXL"),
+            ("xxxl", "XXXL"),
+        ]
+    )
+
+    top_size = fields.Selection(
+        string="Talla de top",
+        selection=[
+            ("xxs", "XXS"),
+            ("xs", "XS"),
+            ("s", "S"),
+            ("m", "M"),
+            ("l", "L"),
+            ("xl", "XL"),
+            ("xxl", "XXL"),
+        ]
+    )
     tutor_phone = fields.Char(string="Emergency phone")
     tutor_name = fields.Char(string="Nombre del contacto de emergencia")
     validate_portal_user = fields.Boolean(
@@ -18,10 +52,6 @@ class ResPartner(models.Model):
     valid_receipt = fields.Boolean(
         string="Validate receipt",
         help="Allows to validate the attachment receipt."
-    )
-    attach_receipt = fields.Boolean(
-        string="Attach receipt",
-        help="Allows to know if the user has attached the receipt of payment."
     )
 
     @api.multi

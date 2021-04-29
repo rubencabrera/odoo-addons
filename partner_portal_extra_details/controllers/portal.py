@@ -23,6 +23,8 @@ class RayitoCustomerPortal(CustomerPortal):
     OPTIONAL_BILLING_FIELDS = [
         "company_name",
         "state_id",
+        "shirt_size",
+        "top_size",
         "zipcode",
     ]
 
@@ -45,6 +47,8 @@ class RayitoCustomerPortal(CustomerPortal):
     def _get_optional_billing_fields(self):
         OPTIONAL_BILLING_FIELDS = [
             "company_name",
+            "shirt_size",
+            "top_size",
             "state_id",
             "zipcode",
         ]
