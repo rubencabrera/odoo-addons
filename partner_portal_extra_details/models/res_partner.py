@@ -45,6 +45,7 @@ class ResPartner(models.Model):
     )
     tutor_phone = fields.Char(string="Emergency phone")
     tutor_name = fields.Char(string="Nombre del contacto de emergencia")
+    uniform_number = fields.Integer(string="Dorsal")
     validate_portal_user = fields.Boolean(
         string="Validate portal user",
         help="Allows to validate the user registered in the portal."
