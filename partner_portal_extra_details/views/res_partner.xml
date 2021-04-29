@@ -15,6 +15,12 @@
                 <field name='attach_receipt' />
             </xpath>
         </field>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='personal_information_group']">
+                <field name='shirt_size' />
+                <field name="top_size" />
+            </xpath>
+        </field>
     </record>
 
     <record id="view_partner_rayito_tree" model="ir.ui.view">

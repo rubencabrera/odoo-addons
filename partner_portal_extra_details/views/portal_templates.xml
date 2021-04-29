@@ -1,38 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="portal_my_details_ficha"
-              name="Extendedn portal details"
+              name="Extended portal details"
               inherit_id="portal.portal_my_details">
-                        <xpath expr="//label[@for='phone']/parent::div" position="after">
-                            <div t-attf-class="form-group #{error.get('tutor_phone') and 'o_has_error' or ''} col-xl-6">
+        <xpath expr="//label[@for='phone']/parent::div" position="after">
+            <div t-attf-class="form-group #{error.get('tutor_phone') and 'o_has_error' or ''} col-xl-6">
 				<label class="col-form-label" for="tutor_phone">Teléfono de emergencia</label>
-                                <input id="tutor_phone" type="tel" name="tutor_phone" t-attf-class="form-control #{error.get('tutor_phone') and 'is-invalid' or ''}" t-att-value="tutor_phone or partner.tutor_phone"/>
-                            </div>
-                            <div t-attf-class="form-group #{error.get('tutor_name') and 'o_has_error' or ''} col-xl-6">
+                    <input id="tutor_phone" type="tel" name="tutor_phone" t-attf-class="form-control #{error.get('tutor_phone') and 'is-invalid' or ''}" t-att-value="tutor_phone or partner.tutor_phone"/>
+            </div>
+            <div t-attf-class="form-group #{error.get('tutor_name') and 'o_has_error' or ''} col-xl-6">
 				<label class="col-form-label" for="tutor_name">Nombre del contacto de emergencia</label>
-                                <input id="tutor_name" type="tel" name="tutor_name" t-attf-class="form-control #{error.get('tutor_name') and 'is-invalid' or ''}" t-att-value="tutor_name or partner.tutor_name"/>
-                            </div>
-                            <div t-attf-class="form-group #{error.get('gender') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label" for="gender">Categoría</label>
-                                <select name="gender" t-attf-class="form-control #{error.get('gender') and 'is-invalid' or ''}" t-att-value="gender or partner.gender">
-                                    <option value="" t-att-selected="'selected' if not partner.gender else None">Categoría...</option>
-                                    <option value="female" t-att-selected="'selected' if 'female'==gender or 'female'==partner.gender else None">Femenina</option>
-                                    <option value="male" t-att-selected="'selected' if 'male'==gender or 'male'==partner.gender else None">Masculina</option>
-                                </select>
-                            </div>
-                            <div t-attf-class="form-group #{error.get('birthdate_date') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label" for="birthdate_date">Fecha de nacimiento</label>
+                    <input id="tutor_name" type="tel" name="tutor_name" t-attf-class="form-control #{error.get('tutor_name') and 'is-invalid' or ''}" t-att-value="tutor_name or partner.tutor_name"/>
+            </div>
+            <div t-attf-class="form-group #{error.get('gender') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label" for="gender">Categoría</label>
+                <select name="gender" t-attf-class="form-control #{error.get('gender') and 'is-invalid' or ''}" t-att-value="gender or partner.gender">
+                    <option value="" t-att-selected="'selected' if not partner.gender else None">Categoría...</option>
+                    <option value="female" t-att-selected="'selected' if 'female'==gender or 'female'==partner.gender else None">Femenina</option>
+                    <option value="male" t-att-selected="'selected' if 'male'==gender or 'male'==partner.gender else None">Masculina</option>
+                </select>
+            </div>
+            <div t-attf-class="form-group #{error.get('shirt_size') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label" for="shirt_size">Talla de camiseta</label>
+                <select name="shirt_size" t-attf-class="form-control #{error.get('shirt_size') and 'is-invalid' or ''}" t-att-value="shirt_size or partner.shirt_size">
+                    <option value="" t-att-selected="'selected' if not partner.shirt_size else None">Seleciona una talla...</option>
+                    <option value="4" t-att-selected="'selected' if '4'==shirt_size or '4'==partner.shirt_size else None">4</option>
+                    <option value="8" t-att-selected="'selected' if '8'==shirt_size or '8'==partner.shirt_size else None">8</option>
+                    <option value="xs" t-att-selected="'selected' if 'xs'==shirt_size or 'xs'==partner.shirt_size else None">XS</option>
+                    <option value="s" t-att-selected="'selected' if 's'==shirt_size or 's'==partner.shirt_size else None">S</option>
+                    <option value="m" t-att-selected="'selected' if 'm'==shirt_size or 'm'==partner.shirt_size else None">M</option>
+                    <option value="l" t-att-selected="'selected' if 'l'==shirt_size or 'l'==partner.shirt_size else None">L</option>
+                    <option value="xl" t-att-selected="'selected' if 'xl'==shirt_size or 'xl'==partner.shirt_size else None">XL</option>
+                    <option value="xxl" t-att-selected="'selected' if 'xxl'==shirt_size or 'xxl'==partner.shirt_size else None">XXL</option>
+                    <option value="xxxl" t-att-selected="'selected' if 'xxxl'==shirt_size or 'xxxl'==partner.shirt_size else None">XXXL</option>
+                </select>
+            </div>
+            <div t-attf-class="form-group #{error.get('top_size') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label" for="top_size">Talla de top</label>
+                <select name="top_size" t-attf-class="form-control #{error.get('top_size') and 'is-invalid' or ''}" t-att-value="top_size or partner.top_size">
+                    <option value="" t-att-selected="'selected' if not partner.top_size else None">Seleciona una talla...</option>
+                    <option value="xxs" t-att-selected="'selected' if 'xxs'==top_size or 'xxs'==partner.top_size else None">XXS</option>
+                    <option value="xs" t-att-selected="'selected' if 'xs'==top_size or 'xs'==partner.top_size else None">XS</option>
+                    <option value="s" t-att-selected="'selected' if 's'==top_size or 's'==partner.top_size else None">S</option>
+                    <option value="m" t-att-selected="'selected' if 'm'==top_size or 'm'==partner.top_size else None">M</option>
+                    <option value="l" t-att-selected="'selected' if 'l'==top_size or 'l'==partner.top_size else None">L</option>
+                    <option value="xl" t-att-selected="'selected' if 'xl'==top_size or 'xl'==partner.top_size else None">XL</option>
+                    <option value="xxl" t-att-selected="'selected' if 'xxl'==top_size or 'xxl'==partner.top_size else None">XXL</option>
+                </select>
+            </div>
+            <div t-attf-class="form-group #{error.get('birthdate_date') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label" for="birthdate_date">Fecha de nacimiento</label>
 				<input id="birthdate_date" type="date" name="birthdate_date" t-attf-class="form-control #{error.get('birthdate_date') and 'is-invalid' or ''} o_datepicker_input o_website_form_date" t-att-value="birthdate_date or partner.birthdate_date"/>
-                            </div>
-                        </xpath>
-			<xpath expr="//label[@for='company_name']/parent::div" position="replace">
-                        </xpath>
-			<xpath expr="//label[@for='vat']/parent::div" position="replace">
-                            <div t-attf-class="form-group #{error.get('vat') and 'o_has_error' or ''} col-xl-6">
+            </div>
+        </xpath>
+        <xpath expr="//label[@for='company_name']/parent::div" position="replace">
+        </xpath>
+        <xpath expr="//label[@for='vat']/parent::div" position="replace">
+            <div t-attf-class="form-group #{error.get('vat') and 'o_has_error' or ''} col-xl-6">
 				<label class="col-form-label" for="vat" placeholder="01234567Z">DNI</label>
-                                <input type="text" name="vat" t-attf-class="form-control #{error.get('vat') and 'is-invalid' or ''}" t-att-value="vat or partner.vat"/>
-                            </div>
-                        </xpath>
+                <input type="text" name="vat" t-attf-class="form-control #{error.get('vat') and 'is-invalid' or ''}" t-att-value="vat or partner.vat"/>
+            </div>
+        </xpath>
     </template>
 
      <template id="portal_my_details_receipt_payment">
