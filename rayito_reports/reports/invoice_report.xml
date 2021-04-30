@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_invoice_rayito" inherit_id="account.report_invoice_document">
+            <xpath expr="//p[@name='payment_term']" position="before">
+                <p t-if="o.reference">
+                    Número de cuenta para el ingreso: ES20 3005 0066 5724 0355 8923
+                </p>
+            </xpath>
+        </template>
+    </data>
+</odoo>
