@@ -59,6 +59,7 @@ class ResPartner(models.Model):
     def write(self, values):
         if values.get('validate_portal_user'):
             self._send_mail_to_new_validate_user()
+            self._grant_portal_access()
         if values.get('valid_receipt'):
             self._send_validate_mail()
         return super(ResPartner, self).write(values)
@@ -128,6 +129,13 @@ class ResPartner(models.Model):
             'invoice_line_tax_ids': [(6, 0, [product.taxes_id.id])],
         })]
         return values
+
+    @api.multi
+    def _grant_portal_access(self):
+        context = {'active_ids': self.ids}
+        PortalWizard = self.env['portal.wizard'].with_context(context)
+        portal_wizard = PortalWizard.create({'welcome_message': False})
+        return portal_wizard.action_apply()
 
     def _send_validate_mail(self):
         self.ensure_one()
