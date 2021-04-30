@@ -14,8 +14,6 @@
                 <field name='valid_receipt' />
                 <field name='attach_receipt' />
             </xpath>
-        </field>
-        <field name="arch" type="xml">
             <xpath expr="//group[@name='personal_information_group']">
                 <field name='shirt_size' />
                 <field name="top_size" />
