@@ -167,18 +167,17 @@ class ResPartner(models.Model):
         return True
 
     def create_invoiced_line(self):
-        product_id = self.env.ref(
-            'partner_portal_extra_details.product_template_invoice_payment')
-        account_id = product_id.categ_id.property_account_income_categ_id
+        product = self.env.user.company_id.product_id
+        account_id = product.categ_id.property_account_income_categ_id
         tax_id = self.env.ref('l10n_es.1_account_tax_template_s_iva21s')
         line_vals = [(0, 0, {
-            'name': product_id.name,
+            'name': product.name,
             'origin': 'Factura de registro',
             'account_id': account_id.id,
-            'price_unit': product_id.list_price,
+            'price_unit': product.list_price,
             'quantity': 1.0,
-            'uom_id': product_id.uom_id.id,
-            'product_id': product_id.id,
+            'uom_id': product.uom_id.id,
+            'product_id': product.id,
             'invoice_line_tax_ids': [(6, 0, [tax_id.id])],
         })]
         return line_vals
