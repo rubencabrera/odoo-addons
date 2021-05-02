@@ -70,12 +70,12 @@ class ResPartner(models.Model):
         This function sends an email to the new validated user of the portal.
         """
         self.ensure_one()
-        AccountInvoice = invoices = self.env['account.invoice']
+        account_invoice = invoices = self.env['account.invoice']
         dom = [
             ('partner_id', '=', self.id),
             ('state', '=', 'draft')
         ]
-        invoices |= AccountInvoice.search(
+        invoices |= account_invoice.search(
             dom, order='date_invoice asc', limit=1
         )
         if not invoices:
@@ -85,7 +85,7 @@ class ResPartner(models.Model):
     def _create_partner_invoice(self):
         self.ensure_one()
         partner = self
-        AccountInvoice = self.env['account.invoice']
+        account_invoice = self.env['account.invoice']
         invoice_line_values = self._prepare_invoice_line_values()
         company_id = partner.company_id
         origin = self._get_invoice_origin()
@@ -99,9 +99,10 @@ class ResPartner(models.Model):
             'company_id': company_id.id,
             'origin': origin
         }
-        invoice = AccountInvoice.new(values)
+        invoice = account_invoice.new(values)
         invoice._onchange_partner_id()
-        invoice = AccountInvoice.create(values)
+        invoice = account_invoice.create(values)
+        invoice.action_invoice_open()
         return invoice
 
     def _get_invoice_origin(self):
@@ -145,46 +146,3 @@ class ResPartner(models.Model):
             "%s.email_template_send_user_valid_receipt" % module_name
         )
         template.send_mail(partner.id, force_send=True)
-
-    @api.multi
-    def create_partner_invoice(self, partner_ids):
-        Account_invoice = self.env['account.invoice']
-        company_id = self.env.ref('base.main_company')
-        line_vals = self.create_invoiced_line()
-        for partner in partner_ids:
-            invoice_vals = {
-                'type': 'out_invoice',
-                'reference': partner.name,
-                'partner_id': partner.id,
-                'date_invoice': fields.Date.today(),
-                'invoice_line_ids': line_vals,
-                'currency_id': company_id.currency_id.id,
-                'company_id': company_id.id,
-                'origin': partner.firstname
-            }
-            invoice_id = Account_invoice.create(invoice_vals)
-            invoice_id._onchange_partner_id()
-        return True
-
-    def create_invoiced_line(self):
-        product_id = self.env.ref(
-            'partner_portal_extra_details.product_template_invoice_payment')
-        account_id = product_id.categ_id.property_account_income_categ_id
-        tax_id = self.env.ref('l10n_es.1_account_tax_template_s_iva21s')
-        line_vals = [(0, 0, {
-            'name': product_id.name,
-            'origin': 'Factura de registro',
-            'account_id': account_id.id,
-            'price_unit': product_id.list_price,
-            'quantity': 1.0,
-            'uom_id': product_id.uom_id.id,
-            'product_id': product_id.id,
-            'invoice_line_tax_ids': [(6, 0, [tax_id.id])],
-        })]
-        return line_vals
-
-    @api.model
-    def create(self, vals):
-        res = super(ResPartner, self).create(vals)
-        self.create_partner_invoice(res)
-        return res

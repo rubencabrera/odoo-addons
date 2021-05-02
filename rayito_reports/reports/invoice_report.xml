@@ -8,6 +8,14 @@
                     Número de cuenta para el ingreso: ES20 3005 0066 5724 0355 8923
                 </p>
             </xpath>
+            <xpath expr="//p[@t-if='o.reference']" position="replace">
+		    <p t-if="o.number">
+			Por favor, indique esta referencia de cuota en el concepto del ingreso: <b><span t-field="o.number"/></b>
+		    </p>
+            </xpath>
+	    <xpath expr="//h2/span[1]" position="replace">
+                        <span t-if="o.type == 'out_invoice' and o.state in ('open', 'in_payment', 'paid')">Cuota</span>
+            </xpath>
         </template>
     </data>
 </odoo>
