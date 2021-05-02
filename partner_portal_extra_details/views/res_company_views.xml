@@ -10,6 +10,7 @@
                     <group>
                         <group>
                             <field name="product_id" domain="[('type','=', 'service')]"/>
+                            <field name="payment_reminder_days"/>
                         </group>
                     </group>
                 </page>
