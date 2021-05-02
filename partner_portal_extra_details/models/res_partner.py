@@ -187,3 +187,9 @@ class ResPartner(models.Model):
         res = super(ResPartner, self).create(vals)
         self.create_partner_invoice(res)
         return res
+
+    @api.model
+    def partner_payment_reminder(self):
+        import logging
+        _logger = logging.getLogger(__name__)
+        _logger.info('Partner payment reminder cron in running...')
