@@ -104,5 +104,24 @@
             </field>
         </record>
 
+        <record id="mail_template_payment_reminder" model="mail.template">
+            <field name="name">Payment reminder</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="partner_to">${object.id}</field>
+            <field name="subject">To attach payment receipt (${object.company_id.name})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear ${object.name},
+                        <br /><br />
+                        Reminder to attach payment receipt at your portal user.
+                        <br /><br />
+                        Do not hesitate to contact us if you have any question.
+                    </p>
+                </div>
+            </field>
+            <field name="lang">${object.lang}</field>
+        </record>
+
     </data>
 </odoo>

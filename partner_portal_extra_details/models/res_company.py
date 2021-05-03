@@ -11,3 +11,9 @@ class ResCompany(models.Model):
         comodel_name="product.product",
         string="Service to invoice"
     )
+    payment_reminder_days = fields.Integer(
+        string='Payment reminder days',
+        help='Set the number of days to remind the user to make the payment. '
+             'Set zero to don\'t send reminder.',
+        default=3,
+    )
