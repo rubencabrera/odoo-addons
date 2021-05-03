@@ -13,6 +13,7 @@ class ResCompany(models.Model):
     )
     payment_reminder_days = fields.Integer(
         string='Payment reminder days',
-        help='Set the number of days to remind the user to make the payment.',
+        help='Set the number of days to remind the user to make the payment. '
+             'Set zero to don\'t send reminder.',
         default=3,
     )

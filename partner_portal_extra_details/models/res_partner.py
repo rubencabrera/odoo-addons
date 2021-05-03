@@ -169,8 +169,9 @@ class ResPartner(models.Model):
             today = fields.Date.today()
             to_date = fields.Date.to_date
             reminder_days = self.env.user.company_id.payment_reminder_days
-            for partner in partners.filtered(filter_partners_to_remind):
-                partner._send_payment_reminder_mail()
+            if reminder_days:
+                for partner in partners.filtered(filter_partners_to_remind):
+                    partner._send_payment_reminder_mail()
         _logger.info('%s cron finished!', log_message)
 
     @api.multi
