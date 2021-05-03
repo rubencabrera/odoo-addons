@@ -10,7 +10,7 @@
             </div>
             <div t-attf-class="form-group #{error.get('tutor_name') and 'o_has_error' or ''} col-xl-6">
 				<label class="col-form-label" for="tutor_name">Nombre del contacto de emergencia</label>
-                    <input id="tutor_name" type="tel" name="tutor_name" t-attf-class="form-control #{error.get('tutor_name') and 'is-invalid' or ''}" t-att-value="tutor_name or partner.tutor_name"/>
+                    <input id="tutor_name" type="text" name="tutor_name" t-attf-class="form-control #{error.get('tutor_name') and 'is-invalid' or ''}" t-att-value="tutor_name or partner.tutor_name"/>
             </div>
             <div t-attf-class="form-group #{error.get('gender') and 'o_has_error' or ''} col-xl-6">
                 <label class="col-form-label" for="gender">Categoría</label>
