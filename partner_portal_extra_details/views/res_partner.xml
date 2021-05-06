@@ -18,6 +18,7 @@
                 <field name='shirt_size' />
                 <field name="top_size" />
                 <field name="uniform_number" />
+                <field name="player_category" />
             </xpath>
         </field>
     </record>

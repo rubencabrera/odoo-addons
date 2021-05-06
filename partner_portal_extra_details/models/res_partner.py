@@ -9,6 +9,16 @@ from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
+CATEGORY_BY_AGE = {
+    tuple(range(0, 9)): _('SUB-8'),
+    tuple(range(9, 11)): _('SUB-10'),
+    tuple(range(11, 13)): _('SUB-12'),
+    tuple(range(13, 15)): _('SUB-14'),
+    tuple(range(15, 17)): _('SUB-16'),
+    tuple(range(17, 19)): _('SUB-18'),
+    tuple(range(19, 120)): _('ABSOLUTE'),
+}
+
 
 class ResPartner(models.Model):
     """Adds simple emergency contact fields"""
@@ -57,6 +67,11 @@ class ResPartner(models.Model):
     valid_receipt = fields.Boolean(
         string="Validate receipt",
         help="Allows to validate the attachment receipt."
+    )
+    player_category = fields.Char(
+        string='Player category',
+        compute='_compute_player_category',
+        store=True,
     )
 
     @api.multi
@@ -181,3 +196,38 @@ class ResPartner(models.Model):
             'partner_portal_extra_details.mail_template_payment_reminder'
         )
         template.send_mail(self.id, force_send=True)
+
+    @api.multi
+    @api.depends('gender', 'birthdate_date')
+    def _compute_player_category(self):
+        for partner in self:
+            if partner.gender and partner.birthdate_date:
+                partner._set_player_category()
+
+    @api.multi
+    def _set_player_category(self):
+        self.ensure_one()
+        player_category = _('OTHER')
+        if self.gender != 'other':
+            partner_age = self._get_partner_age()
+            player_category = self._get_player_category_by_age(partner_age)
+            if player_category:
+                player_category = '%s (%s)' % (
+                    player_category,
+                    self.gender == 'male' and _('MALE') or _('FEMALE'),
+                )
+        self.player_category = player_category
+
+    @api.multi
+    def _get_partner_age(self):
+        self.ensure_one()
+        current_year = fields.Date.today().year
+        birth_date_year = fields.Date.to_date(self.birthdate_date).year
+        return current_year - birth_date_year
+
+    @api.multi
+    def _get_player_category_by_age(self, age):
+        self.ensure_one()
+        for age_range, player_category in CATEGORY_BY_AGE.items():
+            if age in age_range:
+                return player_category
