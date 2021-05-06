@@ -197,6 +197,10 @@ class ResPartner(models.Model):
         )
         template.send_mail(self.id, force_send=True)
 
+    @api.model
+    def compute_player_category(self):
+        self.search([])._compute_player_category()
+
     @api.multi
     @api.depends('gender', 'birthdate_date')
     def _compute_player_category(self):
@@ -207,7 +211,7 @@ class ResPartner(models.Model):
     @api.multi
     def _set_player_category(self):
         self.ensure_one()
-        player_category = _('OTHER')
+        player_category = _('OTHERS')
         if self.gender != 'other':
             partner_age = self._get_partner_age()
             player_category = self._get_player_category_by_age(partner_age)

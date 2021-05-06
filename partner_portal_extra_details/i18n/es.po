@@ -252,7 +252,7 @@ msgstr ""
 #: code:addons/partner_portal_extra_details/models/res_partner.py:217
 #, python-format
 msgid "FEMALE"
-msgstr ""
+msgstr "FEMENINO"
 
 #. module: partner_portal_extra_details
 #: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
@@ -303,7 +303,7 @@ msgstr "Última actualización el"
 #: code:addons/partner_portal_extra_details/models/res_partner.py:217
 #, python-format
 msgid "MALE"
-msgstr ""
+msgstr "MASCULINO"
 
 #. module: partner_portal_extra_details
 #: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
@@ -320,8 +320,8 @@ msgstr ""
 #. module: partner_portal_extra_details
 #: code:addons/partner_portal_extra_details/models/res_partner.py:210
 #, python-format
-msgid "OTHER"
-msgstr ""
+msgid "OTHERS"
+msgstr "OTROS"
 
 #. module: partner_portal_extra_details
 #: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.view_res_company_product_service_inherit_form
@@ -338,7 +338,14 @@ msgstr ""
 #: model:ir.cron,cron_name:partner_portal_extra_details.ir_cron_partner_payment_reminder
 #: model:ir.cron,name:partner_portal_extra_details.ir_cron_partner_payment_reminder
 msgid "Payment reminder"
-msgstr ""
+msgstr "Recordatorio de pago"
+
+#. module: partner_portal_extra_details
+#: model:ir.actions.server,name:partner_portal_extra_details.ir_cron_partner_compute_player_category_ir_actions_server
+#: model:ir.cron,cron_name:partner_portal_extra_details.ir_cron_partner_compute_player_category
+#: model:ir.cron,name:partner_portal_extra_details.ir_cron_partner_compute_player_category
+msgid "To compute player category"
+msgstr "Calcular la categoría del jugador"
 
 #. module: partner_portal_extra_details
 #: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_company__payment_reminder_days
