@@ -1,0 +1,510 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* partner_portal_extra_details
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-05-06 17:56+0000\n"
+"PO-Revision-Date: 2021-05-06 17:56+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_portal_extra_details
+#: model:mail.template,subject:partner_portal_extra_details.email_template_send_user_payment_term
+msgid "${object.company_id.name} Invoice (Ref ${object.number or 'n/a'})"
+msgstr "${object.company_id.name} Factura (Ref ${object.number or 'n/a'})"
+
+#. module: partner_portal_extra_details
+#: model:mail.template,subject:partner_portal_extra_details.email_template_send_user_valid_receipt
+msgid "${object.company_id.name} Validate receipt (Ref ${object.firstname or 'n/a'})"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+msgid "01234567Z o X1234567L"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: selection:res.partner,shirt_size:0
+msgid "12"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:mail.template,body_html:partner_portal_extra_details.mail_template_payment_reminder
+msgid "<div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Dear ${object.name},<br><br>\n"
+"                        Reminder attach the payment receipt at your portal user.\n"
+"                        <br><br>\n"
+"                        Do not hesitate to contact us if you have any question.\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:mail.template,body_html:partner_portal_extra_details.email_template_send_user_payment_term
+msgid "<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Dear ${object.partner_id.name}\n"
+"                        % if object.partner_id.parent_id:\n"
+"                            (${object.partner_id.parent_id.name})\n"
+"                        % endif\n"
+"                        <br/><br/>\n"
+"                        Here is your\n"
+"                        % if object.number:\n"
+"                            invoice <strong>${object.number}</strong>\n"
+"                        % else:\n"
+"                            invoice\n"
+"                        %endif\n"
+"                        % if object.origin:\n"
+"                            (with reference: ${object.origin})\n"
+"                        % endif\n"
+"                        amounting in <strong>${format_amount(object.amount_total, object.currency_id)}</strong>\n"
+"                        from ${object.company_id.name}.\n"
+"                        % if object.state=='paid':\n"
+"                            This invoice is already paid.\n"
+"                        % else:\n"
+"                            Please remit payment at your earliest convenience.\n"
+"                        % endif\n"
+"                        <br/><br/>\n"
+"                        Do not hesitate to contact us if you have any question.\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_layout_receipt_payment
+msgid "<i class=\"fa fa-plus-circle\"/>Subir Justificante"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.view_automatic_partner_invoice
+msgid "<span class=\"o_form_label\">Facturas automáticas para los clientes seleccionados...</span>"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_layout_receipt_payment
+msgid "<strong>Adjunta el justificante de pago</strong>"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_layout_receipt_payment
+msgid "<strong>Justificante enviado, recibirá un mail de confirmación</strong>"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:mail.template,body_html:partner_portal_extra_details.email_template_send_user_valid_receipt
+msgid "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"padding: 16px; background-color: white; color: #454748; border-collapse:separate;\">\n"
+"                    <tbody>\n"
+"                        <!-- HEADER -->\n"
+"                        <tr>\n"
+"                            <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"                                    <tr><td valign=\"middle\">\n"
+"                                        <span style=\"font-size: 10px;\">Payment confirmation</span><br/>\n"
+"                                        <span style=\"font-size: 20px; font-weight: bold;\">\n"
+"                                            ${object.name}\n"
+"                                        </span>\n"
+"                                    </td><td valign=\"middle\" align=\"right\">\n"
+"                                        <img src=\"${'/logo.png?company=%s' % object.company_id.id}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${'%s' % object.company_id.name}\"/>\n"
+"                                    </td></tr>\n"
+"                                    <tr><td colspan=\"2\" style=\"text-align:center;\">\n"
+"                                      <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;\"/>\n"
+"                                    </td></tr>\n"
+"                                </table>\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                        <!-- EVENT DESCRIPTION -->\n"
+"                        <tr>\n"
+"                            <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"                                    <tr>\n"
+"                                        <td valign=\"top\" style=\"font-size: 14px;\">\n"
+"                                            <div>\n"
+"                                                Hello ${object.name or ''},<br/>\n"
+"                                                We are happy to confirm your registration to the event\n"
+"                                            </div>\n"
+"                                            <div style=\"margin: 16px 0px 16px 0px;\">\n"
+"                                                <a href=\"${object.website_url}\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:16px;\">click to see you authorization</a><br/>\n"
+"                                            </div>\n"
+"                                        </td>\n"
+"                                    </tr>\n"
+"                                    <tr>\n"
+"                                        <td style=\"text-align:center;\">\n"
+"                                            <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\"/>\n"
+"                                        </td>\n"
+"                                    </tr>\n"
+"                                </table>\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                    </tbody>\n"
+"                </table>\n"
+"            "
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: code:addons/partner_portal_extra_details/models/res_partner.py:19
+#, python-format
+msgid "ABSOLUTE"
+msgstr "SÉNIOR"
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_receipt_payment
+msgid "Adjunta el justificante de pago"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,help:partner_portal_extra_details.field_res_partner__attach_receipt
+#: model:ir.model.fields,help:partner_portal_extra_details.field_res_users__attach_receipt
+msgid "Allows to know if the user has attached the receipt of payment."
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,help:partner_portal_extra_details.field_res_partner__valid_receipt
+#: model:ir.model.fields,help:partner_portal_extra_details.field_res_users__valid_receipt
+msgid "Allows to validate the attachment receipt."
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,help:partner_portal_extra_details.field_res_partner__validate_portal_user
+#: model:ir.model.fields,help:partner_portal_extra_details.field_res_users__validate_portal_user
+msgid "Allows to validate the user registered in the portal."
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_partner__attach_receipt
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_users__attach_receipt
+msgid "Attach receipt"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.actions.act_window,name:partner_portal_extra_details.action_partner_automatic_invoice
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.view_automatic_partner_invoice
+msgid "Automatic Invoice"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.view_automatic_partner_invoice
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+msgid "Categoría"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+msgid "Categoría..."
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model,name:partner_portal_extra_details.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: partner_portal_extra_details
+#: model:ir.model,name:partner_portal_extra_details.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_automatic_partner_invoice__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_automatic_partner_invoice__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+msgid "DNI o NIE"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_automatic_partner_invoice__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_partner__uniform_number
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_users__uniform_number
+msgid "Dorsal"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_partner__tutor_phone
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_users__tutor_phone
+msgid "Emergency phone"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: code:addons/partner_portal_extra_details/models/res_partner.py:217
+#, python-format
+msgid "FEMALE"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+msgid "Fecha de nacimiento"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+msgid "Femenina"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_automatic_partner_invoice__id
+msgid "ID"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model,name:partner_portal_extra_details.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: partner_portal_extra_details
+#: model:mail.template,report_name:partner_portal_extra_details.email_template_send_user_payment_term
+msgid "Invoice_${(object.number or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}"
+msgstr "Factura_${(object.number or '').replace('/','_')}${object.state == 'draft' and '_borrador' or ''}"
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_receipt_payment
+msgid "Justificante de pago"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_automatic_partner_invoice____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_automatic_partner_invoice__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_automatic_partner_invoice__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: partner_portal_extra_details
+#: code:addons/partner_portal_extra_details/models/res_partner.py:217
+#, python-format
+msgid "MALE"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+msgid "Masculina"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_partner__tutor_name
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_users__tutor_name
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+msgid "Nombre del contacto de emergencia"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: code:addons/partner_portal_extra_details/models/res_partner.py:210
+#, python-format
+msgid "OTHER"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.view_res_company_product_service_inherit_form
+msgid "Other information"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:product.template,name:partner_portal_extra_details.product_template_invoice_payment
+msgid "Pago de servicios"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.actions.server,name:partner_portal_extra_details.ir_cron_partner_payment_reminder_ir_actions_server
+#: model:ir.cron,cron_name:partner_portal_extra_details.ir_cron_partner_payment_reminder
+#: model:ir.cron,name:partner_portal_extra_details.ir_cron_partner_payment_reminder
+msgid "Payment reminder"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_company__payment_reminder_days
+msgid "Payment reminder days"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_partner__player_category
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_users__player_category
+msgid "Player category"
+msgstr "Categoría del jugador"
+
+#. module: partner_portal_extra_details
+#: code:addons/partner_portal_extra_details/models/res_partner.py:14
+#, python-format
+msgid "SUB-10"
+msgstr "BENJAMÍN"
+
+#. module: partner_portal_extra_details
+#: code:addons/partner_portal_extra_details/models/res_partner.py:15
+#, python-format
+msgid "SUB-12"
+msgstr "ALEVÍN"
+
+#. module: partner_portal_extra_details
+#: code:addons/partner_portal_extra_details/models/res_partner.py:16
+#, python-format
+msgid "SUB-14"
+msgstr "INFANTIL"
+
+#. module: partner_portal_extra_details
+#: code:addons/partner_portal_extra_details/models/res_partner.py:17
+#, python-format
+msgid "SUB-16"
+msgstr "CADETE"
+
+#. module: partner_portal_extra_details
+#: code:addons/partner_portal_extra_details/models/res_partner.py:18
+#, python-format
+msgid "SUB-18"
+msgstr "JUVENIL"
+
+#. module: partner_portal_extra_details
+#: code:addons/partner_portal_extra_details/models/res_partner.py:13
+#, python-format
+msgid "SUB-8"
+msgstr "PRE-BENJAMÍN"
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+msgid "Seleciona una talla..."
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_receipt_payment
+msgid "Send\n"
+"                                <span class=\"fa fa-long-arrow-right\"/>"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_company__product_id
+msgid "Service to invoice"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,help:partner_portal_extra_details.field_res_company__payment_reminder_days
+msgid "Set the number of days to remind the user to make the payment. Set zero to don't send reminder."
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_receipt_payment
+msgid "Subir Justificante"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_partner__shirt_size
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_users__shirt_size
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+msgid "Talla de camiseta"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_partner__top_size
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_users__top_size
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+msgid "Talla de top"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+msgid "Teléfono de emergencia"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:mail.template,subject:partner_portal_extra_details.mail_template_payment_reminder
+msgid "To attach payment receipt (${object.company_id.name})"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:product.template,uom_name:partner_portal_extra_details.product_template_invoice_payment
+msgid "Unit(s)"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_partner__validate_portal_user
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_users__validate_portal_user
+msgid "Validate portal user"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_partner__valid_receipt
+#: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_users__valid_receipt
+msgid "Validate receipt"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+#: selection:res.partner,shirt_size:0
+#: selection:res.partner,top_size:0
+msgid "XL"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+#: selection:res.partner,shirt_size:0
+#: selection:res.partner,top_size:0
+msgid "XS"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+#: selection:res.partner,shirt_size:0
+#: selection:res.partner,top_size:0
+msgid "XXL"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+#: selection:res.partner,top_size:0
+msgid "XXS"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+#: selection:res.partner,shirt_size:0
+msgid "XXXL"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
+msgid "YYYY-MM-DD"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: code:addons/partner_portal_extra_details/models/res_partner.py:138
+#, python-format
+msgid "You must select the service to create invoice."
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:ir.model,name:partner_portal_extra_details.model_automatic_partner_invoice
+msgid "automatic.partner.invoice"
+msgstr ""
+
+#. module: partner_portal_extra_details
+#: model:product.template,weight_uom_name:partner_portal_extra_details.product_template_invoice_payment
+msgid "kg"
+msgstr ""
+
