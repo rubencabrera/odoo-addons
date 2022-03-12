@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="header_invoice_rayito" inherit_id="web.external_layout_clean">
+            <xpath expr="//li[@t-if='company.vat']" position="replace">
+                <li t-if="company.vat">CIF: <span t-field="company.vat"/></li>
+            </xpath>
+        </template>
+    </data>
+</odoo>
