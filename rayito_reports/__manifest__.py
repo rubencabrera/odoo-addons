@@ -20,5 +20,6 @@
     "data": [
         # reports
         "reports/invoice_report.xml",
+        "reports/report_header.xml",
     ],
 }

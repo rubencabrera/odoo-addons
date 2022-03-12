@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
         <template id="report_invoice_rayito" inherit_id="account.report_invoice_document">
+
+            <xpath expr="//div[@class='mt16']" position="replace">
+                <div t-if="o.partner_id.vat" class="mt16">CIF: <span t-field="o.partner_id.vat"/></div>
+            </xpath>
+
             <xpath expr="//p[@name='payment_term']" position="before">
                 <p t-if="o.reference">
                     Número de cuenta para el ingreso: ES20 3005 0066 5724 0355 8923
                 </p>
             </xpath>
+
             <xpath expr="//p[@t-if='o.reference']" position="replace">
-		    <p t-if="o.number">
-			Por favor, indique esta referencia de cuota en el concepto del ingreso: <b><span t-field="o.number"/></b>
-		    </p>
+                <p t-if="o.number">
+                    Por favor, indique esta referencia en el concepto del ingreso: <b><span t-field="o.number"/></b>
+                </p>
             </xpath>
-	    <xpath expr="//h2/span[1]" position="replace">
-                        <span t-if="o.type == 'out_invoice' and o.state in ('open', 'in_payment', 'paid')">Cuota</span>
+
+            <xpath expr="//h2/span[1]" position="replace">
+                <span t-if="o.type == 'out_invoice' and o.state in ('open', 'in_payment', 'paid')">Referencia: </span>
             </xpath>
         </template>
     </data>
