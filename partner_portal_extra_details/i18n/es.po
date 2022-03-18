@@ -1,19 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* partner_portal_extra_details
+# 	* partner_portal_extra_details
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-06 17:56+0000\n"
-"PO-Revision-Date: 2021-05-06 17:56+0000\n"
+"POT-Creation-Date: 2022-03-18 20:57+0000\n"
+"PO-Revision-Date: 2022-03-18 21:06+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"X-Generator: Poedit 3.0.1\n"
 
 #. module: partner_portal_extra_details
 #: model:mail.template,subject:partner_portal_extra_details.email_template_send_user_payment_term
@@ -37,20 +39,17 @@ msgstr ""
 
 #. module: partner_portal_extra_details
 #: model:mail.template,body_html:partner_portal_extra_details.mail_template_payment_reminder
-msgid "<div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin: 0px; padding: 0px;\">\n"
-"                    <p style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"                        Dear ${object.name},<br><br>\n"
-"                        Reminder attach the payment receipt at your portal user.\n"
-"                        <br><br>\n"
-"                        Do not hesitate to contact us if you have any question.\n"
-"                    </p>\n"
+msgid ""
+"<div style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin: 0px; padding: 0px; font-size: 13px;\"> Hola, ${object.name}, <br><br>Este es un email automatizado para recordar que aún está pendiente la subida del comprobante de pago de su cuota en el portal de usuario.</p><p style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin: 0px; padding: 0px; font-size: 13px;\"><br></p><p style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin: 0px; padding: 0px; font-size: 13px;\">Si tiene cualquier duda, no dude en contactarnos. </p><p style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin: 0px; padding: 0px; font-size: 13px;\"><br></p><p style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin: 0px; padding: 0px; font-size: 13px;\">Un saludo y Buen Rayito. <br></p><p style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin: 0px; padding: 0px; font-size: 13px;\"><br></p>\n"
 "                </div>\n"
 "            "
 msgstr ""
 
 #. module: partner_portal_extra_details
 #: model:mail.template,body_html:partner_portal_extra_details.email_template_send_user_payment_term
-msgid "<div style=\"margin: 0px; padding: 0px;\">\n"
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
 "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "                        Dear ${object.partner_id.name}\n"
 "                        % if object.partner_id.parent_id:\n"
@@ -102,7 +101,8 @@ msgstr ""
 
 #. module: partner_portal_extra_details
 #: model:mail.template,body_html:partner_portal_extra_details.email_template_send_user_valid_receipt
-msgid "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"padding: 16px; background-color: white; color: #454748; border-collapse:separate;\">\n"
+msgid ""
+"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"padding: 16px; background-color: white; color: #454748; border-collapse:separate;\">\n"
 "                    <tbody>\n"
 "                        <!-- HEADER -->\n"
 "                        <tr>\n"
@@ -197,14 +197,19 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: partner_portal_extra_details
+#: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.view_rayito_filters
+msgid "Category"
+msgstr "Categoría"
+
+#. module: partner_portal_extra_details
 #: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
 msgid "Categoría"
-msgstr ""
+msgstr "Categoría"
 
 #. module: partner_portal_extra_details
 #: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
 msgid "Categoría..."
-msgstr ""
+msgstr "Categoría..."
 
 #. module: partner_portal_extra_details
 #: model:ir.model,name:partner_portal_extra_details.model_res_company
@@ -229,7 +234,7 @@ msgstr "Creado el"
 #. module: partner_portal_extra_details
 #: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
 msgid "DNI o NIE"
-msgstr ""
+msgstr "DNI o NIE"
 
 #. module: partner_portal_extra_details
 #: model:ir.model.fields,field_description:partner_portal_extra_details.field_automatic_partner_invoice__display_name
@@ -240,16 +245,16 @@ msgstr "Nombre mostrado"
 #: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_partner__uniform_number
 #: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_users__uniform_number
 msgid "Dorsal"
-msgstr ""
+msgstr "Dorsal"
 
 #. module: partner_portal_extra_details
 #: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_partner__tutor_phone
 #: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_users__tutor_phone
 msgid "Emergency phone"
-msgstr ""
+msgstr "Teléfono de emergencia"
 
 #. module: partner_portal_extra_details
-#: code:addons/partner_portal_extra_details/models/res_partner.py:217
+#: code:addons/partner_portal_extra_details/models/res_partner.py:221
 #, python-format
 msgid "FEMALE"
 msgstr "FEMENINO"
@@ -257,12 +262,12 @@ msgstr "FEMENINO"
 #. module: partner_portal_extra_details
 #: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
 msgid "Fecha de nacimiento"
-msgstr ""
+msgstr "Fecha de nacimiento"
 
 #. module: partner_portal_extra_details
 #: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
 msgid "Femenina"
-msgstr ""
+msgstr "Femenina"
 
 #. module: partner_portal_extra_details
 #: model:ir.model.fields,field_description:partner_portal_extra_details.field_automatic_partner_invoice__id
@@ -300,7 +305,7 @@ msgid "Last Updated on"
 msgstr "Última actualización el"
 
 #. module: partner_portal_extra_details
-#: code:addons/partner_portal_extra_details/models/res_partner.py:217
+#: code:addons/partner_portal_extra_details/models/res_partner.py:221
 #, python-format
 msgid "MALE"
 msgstr "MASCULINO"
@@ -308,7 +313,7 @@ msgstr "MASCULINO"
 #. module: partner_portal_extra_details
 #: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
 msgid "Masculina"
-msgstr ""
+msgstr "Masculina"
 
 #. module: partner_portal_extra_details
 #: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_partner__tutor_name
@@ -318,7 +323,7 @@ msgid "Nombre del contacto de emergencia"
 msgstr ""
 
 #. module: partner_portal_extra_details
-#: code:addons/partner_portal_extra_details/models/res_partner.py:210
+#: code:addons/partner_portal_extra_details/models/res_partner.py:214
 #, python-format
 msgid "OTHERS"
 msgstr "OTROS"
@@ -341,13 +346,6 @@ msgid "Payment reminder"
 msgstr "Recordatorio de pago"
 
 #. module: partner_portal_extra_details
-#: model:ir.actions.server,name:partner_portal_extra_details.ir_cron_partner_compute_player_category_ir_actions_server
-#: model:ir.cron,cron_name:partner_portal_extra_details.ir_cron_partner_compute_player_category
-#: model:ir.cron,name:partner_portal_extra_details.ir_cron_partner_compute_player_category
-msgid "To compute player category"
-msgstr "Calcular la categoría del jugador"
-
-#. module: partner_portal_extra_details
 #: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_company__payment_reminder_days
 msgid "Payment reminder days"
 msgstr ""
@@ -357,6 +355,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:partner_portal_extra_details.field_res_users__player_category
 msgid "Player category"
 msgstr "Categoría del jugador"
+
+#. module: partner_portal_extra_details
+#: model:mail.template,subject:partner_portal_extra_details.mail_template_payment_reminder
+msgid "Recordatorio comprobante de pago (${object.company_id.name})"
+msgstr ""
 
 #. module: partner_portal_extra_details
 #: code:addons/partner_portal_extra_details/models/res_partner.py:14
@@ -401,7 +404,8 @@ msgstr ""
 
 #. module: partner_portal_extra_details
 #: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_receipt_payment
-msgid "Send\n"
+msgid ""
+"Send\n"
 "                                <span class=\"fa fa-long-arrow-right\"/>"
 msgstr ""
 
@@ -440,9 +444,11 @@ msgid "Teléfono de emergencia"
 msgstr ""
 
 #. module: partner_portal_extra_details
-#: model:mail.template,subject:partner_portal_extra_details.mail_template_payment_reminder
-msgid "To attach payment receipt (${object.company_id.name})"
-msgstr ""
+#: model:ir.actions.server,name:partner_portal_extra_details.ir_cron_partner_compute_player_category_ir_actions_server
+#: model:ir.cron,cron_name:partner_portal_extra_details.ir_cron_partner_compute_player_category
+#: model:ir.cron,name:partner_portal_extra_details.ir_cron_partner_compute_player_category
+msgid "To compute player category"
+msgstr "Calcular la categoría del jugador"
 
 #. module: partner_portal_extra_details
 #: model:product.template,uom_name:partner_portal_extra_details.product_template_invoice_payment
@@ -463,22 +469,19 @@ msgstr ""
 
 #. module: partner_portal_extra_details
 #: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
-#: selection:res.partner,shirt_size:0
-#: selection:res.partner,top_size:0
+#: selection:res.partner,shirt_size:0 selection:res.partner,top_size:0
 msgid "XL"
 msgstr ""
 
 #. module: partner_portal_extra_details
 #: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
-#: selection:res.partner,shirt_size:0
-#: selection:res.partner,top_size:0
+#: selection:res.partner,shirt_size:0 selection:res.partner,top_size:0
 msgid "XS"
 msgstr ""
 
 #. module: partner_portal_extra_details
 #: model_terms:ir.ui.view,arch_db:partner_portal_extra_details.portal_my_details_ficha
-#: selection:res.partner,shirt_size:0
-#: selection:res.partner,top_size:0
+#: selection:res.partner,shirt_size:0 selection:res.partner,top_size:0
 msgid "XXL"
 msgstr ""
 
@@ -514,4 +517,3 @@ msgstr ""
 #: model:product.template,weight_uom_name:partner_portal_extra_details.product_template_invoice_payment
 msgid "kg"
 msgstr ""
-

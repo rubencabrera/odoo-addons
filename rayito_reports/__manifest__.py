@@ -3,7 +3,7 @@
 {
     "name": "Rayito Reports",
     "summary": "Reports for Rayito",
-    'version': '12.0.1.0.0',
+    'version': '12.0.5.2.0',
     "category": "Invoicing & Payments",
     "website": "https://github.com/rubencabrera/odoo-addons",
     "author": "Rubén Cabrera Martínez",
