@@ -36,4 +36,22 @@
             </xpath>
         </field>
     </record>
+
+    <record id="view_rayito_filters" model="ir.ui.view">
+        <field name="name">view.res.partner.filter.rayito</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='salesperson']" position="before">
+                <filter name="category" string="Category" context="{'group_by': 'player_category'}"/>
+            </xpath>
+            <xpath expr="//separator[1]" position="after">
+                <filter name="unpaid" string="Validado sin pagar"
+                    domain="[('validate_portal_user','=',True), ('attach_receipt','=',False)]"/>
+                <filter name="pending" string="Recibo por validar"
+                    domain="[('valid_receipt','=',False), ('attach_receipt','=',True)]"/>
+                <separator />
+            </xpath>
+        </field>
+    </record>
 </odoo>

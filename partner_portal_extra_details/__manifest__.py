@@ -3,7 +3,7 @@
 {
     "name": "Rayito Contact Details",
     "summary": "Extended contact details in user portal",
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.1.0',
     "category": "Customer Relationship Management",
     "website": "https://github.com/rubencabrera/odoo-addons",
     "author": "Rubén Cabrera Martínez",
