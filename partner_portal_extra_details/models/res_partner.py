@@ -167,37 +167,6 @@ class ResPartner(models.Model):
         template.send_mail(partner.id, force_send=True)
 
     @api.model
-    def partner_payment_reminder(self):
-        def filter_partners_to_remind(partner):
-            partner_create_date = to_date(partner.create_date)
-            days_in_the_system = (today - partner_create_date).days
-            return days_in_the_system % reminder_days == 0
-
-        log_message = 'Partner payment reminder;'
-        _logger.info('%s cron in running...', log_message)
-        dom = [
-            ('validate_portal_user', '=', True),
-            ('valid_receipt', '=', False),
-        ]
-        partners = self.search(dom)
-        if partners:
-            today = fields.Date.today()
-            to_date = fields.Date.to_date
-            reminder_days = self.env.user.company_id.payment_reminder_days
-            if reminder_days:
-                for partner in partners.filtered(filter_partners_to_remind):
-                    partner._send_payment_reminder_mail()
-        _logger.info('%s cron finished!', log_message)
-
-    @api.multi
-    def _send_payment_reminder_mail(self):
-        self.ensure_one()
-        template = self.env.ref(
-            'partner_portal_extra_details.mail_template_payment_reminder'
-        )
-        template.send_mail(self.id, force_send=True)
-
-    @api.model
     def compute_player_category(self):
         self.search([])._compute_player_category()
 
