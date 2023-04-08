@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright 2020 Rubén Cabrera Martínez <dev@rubencabrera.es>
+# Copyright 2020 CBMP Rayito Salinero
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 import base64
 from odoo.addons.portal.controllers.portal import CustomerPortal
 from odoo.http import request, route
