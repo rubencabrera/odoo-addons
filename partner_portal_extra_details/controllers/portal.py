@@ -28,6 +28,23 @@ class RayitoCustomerPortal(CustomerPortal):
         "zipcode",
     ]
 
+    def _attach_payment_receipt(self, post):
+        Attachment = request.env['ir.attachment']
+        partner = request.env.user.partner_id
+        name = post.get('attachment').filename
+        file = post.get('attachment')
+        data = file.read()
+        attachment = Attachment.sudo().create({
+            'name': name,
+            'datas_fname': name,
+            'res_name': name,
+            'type': 'binary',
+            'res_model': 'res.partner',
+            'res_id': partner.id,
+            'datas': base64.b64encode(data)
+        })
+        return attachment
+
     def _get_mandatory_billing_fields(self):
         MANDATORY_BILLING_FIELDS = [
             "birthdate_date",
@@ -53,6 +70,18 @@ class RayitoCustomerPortal(CustomerPortal):
             "zipcode",
         ]
         return OPTIONAL_BILLING_FIELDS
+
+    def _render_receipt_payment(self, values):
+        response = request.render(
+            "partner_portal_extra_details.portal_my_details_receipt_payment",
+            values
+        )
+        response.headers['X-Frame-Options'] = 'DENY'
+        return response
+
+    def _set_partner_data(self):
+        partner = request.env.user.partner_id
+        partner.write({'attach_receipt': True})
 
     @route(['/my/account'], type='http', auth='user', website=True)
     def account(self, redirect=None, **post):
@@ -115,31 +144,3 @@ class RayitoCustomerPortal(CustomerPortal):
             return request.redirect('/my')
         return response
 
-    def _attach_payment_receipt(self, post):
-        Attachment = request.env['ir.attachment']
-        partner = request.env.user.partner_id
-        name = post.get('attachment').filename
-        file = post.get('attachment')
-        data = file.read()
-        attachment = Attachment.sudo().create({
-            'name': name,
-            'datas_fname': name,
-            'res_name': name,
-            'type': 'binary',
-            'res_model': 'res.partner',
-            'res_id': partner.id,
-            'datas': base64.b64encode(data)
-        })
-        return attachment
-
-    def _render_receipt_payment(self, values):
-        response = request.render(
-            "partner_portal_extra_details.portal_my_details_receipt_payment",
-            values
-        )
-        response.headers['X-Frame-Options'] = 'DENY'
-        return response
-
-    def _set_partner_data(self):
-        partner = request.env.user.partner_id
-        partner.write({'attach_receipt': True})
