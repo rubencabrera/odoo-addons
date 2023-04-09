@@ -26,6 +26,7 @@ class RayitoCustomerPortal(CustomerPortal):
     ]
     OPTIONAL_BILLING_FIELDS = [
         "company_name",
+        "current_year_confirmed",
         "state_id",
         "shirt_size",
         "top_size",
@@ -50,30 +51,10 @@ class RayitoCustomerPortal(CustomerPortal):
         return attachment
 
     def _get_mandatory_billing_fields(self):
-        MANDATORY_BILLING_FIELDS = [
-            "birthdate_date",
-            "city",
-            "country_id",
-            "email",
-            "gender",
-            "name",
-            "phone",
-            "street",
-            "tutor_phone",
-            "tutor_name",
-            "vat",
-        ]
-        return MANDATORY_BILLING_FIELDS
+        return self.MANDATORY_BILLING_FIELDS
 
     def _get_optional_billing_fields(self):
-        OPTIONAL_BILLING_FIELDS = [
-            "company_name",
-            "shirt_size",
-            "top_size",
-            "state_id",
-            "zipcode",
-        ]
-        return OPTIONAL_BILLING_FIELDS
+        return self.OPTIONAL_BILLING_FIELDS
 
     def _render_receipt_payment(self, values):
         response = request.render(
@@ -111,6 +92,12 @@ class RayitoCustomerPortal(CustomerPortal):
                         if key in post
                     }
                 )
+                if "current_year_confirmed" not in values.keys():
+                    values.update(
+                        {
+                            "current_year_confirmed": False,
+                        }
+                    )
                 values.update({'zip': values.pop('zipcode', '')})
                 partner.sudo().write(values)
                 if redirect:
