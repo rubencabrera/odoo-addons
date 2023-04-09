@@ -84,6 +84,13 @@ class ResPartner(models.Model):
         help="Allows to validate the attachment receipt."
     )
 
+    @api.model
+    def restore_current_year_confirmation(self):
+        """
+        Restaurar la confirmación de participación del presente año.
+        """
+        pass
+
     @api.multi
     def write(self, values):
         if values.get('validate_portal_user'):
