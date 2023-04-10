@@ -7,10 +7,11 @@ from odoo import api, fields, models
 class ResCompany(models.Model):
     _inherit = 'res.company'
 
-    product_id = fields.Many2one(
-        comodel_name="product.product",
-        string="Service to invoice"
+    initial_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Plantilla de inicio de temporada",
     )
+
     payment_reminder_days = fields.Integer(
         string='Payment reminder days',
         help='Set the number of days to remind the user to make the payment. '
@@ -18,7 +19,7 @@ class ResCompany(models.Model):
         default=3,
     )
 
-    initial_template = fields.Many2one(
-        comodel_name="mail.template",
-        string="Plantilla de inicio de temporada",
+    product_id = fields.Many2one(
+        comodel_name="product.product",
+        string="Service to invoice"
     )
