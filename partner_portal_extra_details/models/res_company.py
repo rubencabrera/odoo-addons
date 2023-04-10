@@ -17,3 +17,8 @@ class ResCompany(models.Model):
              'Set zero to don\'t send reminder.',
         default=3,
     )
+
+    initial_template = fields.Many2one(
+        comodel_name="mail.template",
+        string="Plantilla de inicio de temporada",
+    )
