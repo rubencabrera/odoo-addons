@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="base.view_company_form"/>
         <field name="arch" type="xml">
             <xpath expr="//page" position="after">
-                <page string="Other information" name="page_other_information">
+                <page string="Utilidades de Club" name="page_other_information">
                     <group>
                         <group>
                             <field name="product_id" domain="[('type','=', 'service')]"/>
