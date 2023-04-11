@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright 2020 Rubén Cabrera Martínez <dev@rubencabrera.es>
+# Copyright 2020 CBMP Rayito Salinero
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 import base64
 from odoo.addons.portal.controllers.portal import CustomerPortal
 from odoo.http import request, route
@@ -22,37 +26,47 @@ class RayitoCustomerPortal(CustomerPortal):
     ]
     OPTIONAL_BILLING_FIELDS = [
         "company_name",
+        "current_year_confirmed",
         "state_id",
         "shirt_size",
         "top_size",
         "zipcode",
     ]
 
+    def _attach_payment_receipt(self, post):
+        Attachment = request.env['ir.attachment']
+        partner = request.env.user.partner_id
+        name = post.get('attachment').filename
+        file = post.get('attachment')
+        data = file.read()
+        attachment = Attachment.sudo().create({
+            'name': name,
+            'datas_fname': name,
+            'res_name': name,
+            'type': 'binary',
+            'res_model': 'res.partner',
+            'res_id': partner.id,
+            'datas': base64.b64encode(data)
+        })
+        return attachment
+
     def _get_mandatory_billing_fields(self):
-        MANDATORY_BILLING_FIELDS = [
-            "birthdate_date",
-            "city",
-            "country_id",
-            "email",
-            "gender",
-            "name",
-            "phone",
-            "street",
-            "tutor_phone",
-            "tutor_name",
-            "vat",
-        ]
-        return MANDATORY_BILLING_FIELDS
+        return self.MANDATORY_BILLING_FIELDS
 
     def _get_optional_billing_fields(self):
-        OPTIONAL_BILLING_FIELDS = [
-            "company_name",
-            "shirt_size",
-            "top_size",
-            "state_id",
-            "zipcode",
-        ]
-        return OPTIONAL_BILLING_FIELDS
+        return self.OPTIONAL_BILLING_FIELDS
+
+    def _render_receipt_payment(self, values):
+        response = request.render(
+            "partner_portal_extra_details.portal_my_details_receipt_payment",
+            values
+        )
+        response.headers['X-Frame-Options'] = 'DENY'
+        return response
+
+    def _set_partner_data(self):
+        partner = request.env.user.partner_id
+        partner.write({'attach_receipt': True})
 
     @route(['/my/account'], type='http', auth='user', website=True)
     def account(self, redirect=None, **post):
@@ -78,6 +92,12 @@ class RayitoCustomerPortal(CustomerPortal):
                         if key in post
                     }
                 )
+                if "current_year_confirmed" not in values.keys():
+                    values.update(
+                        {
+                            "current_year_confirmed": False,
+                        }
+                    )
                 values.update({'zip': values.pop('zipcode', '')})
                 partner.sudo().write(values)
                 if redirect:
@@ -115,31 +135,3 @@ class RayitoCustomerPortal(CustomerPortal):
             return request.redirect('/my')
         return response
 
-    def _attach_payment_receipt(self, post):
-        Attachment = request.env['ir.attachment']
-        partner = request.env.user.partner_id
-        name = post.get('attachment').filename
-        file = post.get('attachment')
-        data = file.read()
-        attachment = Attachment.sudo().create({
-            'name': name,
-            'datas_fname': name,
-            'res_name': name,
-            'type': 'binary',
-            'res_model': 'res.partner',
-            'res_id': partner.id,
-            'datas': base64.b64encode(data)
-        })
-        return attachment
-
-    def _render_receipt_payment(self, values):
-        response = request.render(
-            "partner_portal_extra_details.portal_my_details_receipt_payment",
-            values
-        )
-        response.headers['X-Frame-Options'] = 'DENY'
-        return response
-
-    def _set_partner_data(self):
-        partner = request.env.user.partner_id
-        partner.write({'attach_receipt': True})

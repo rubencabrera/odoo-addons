@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+    <!-- <data noupdate="1"> -->
+    <data>
         <!--Email template -->
         <record id="email_template_send_user_payment_term" model="mail.template">
             <field name="name">Validate user: Send info to the new user</field>
@@ -41,6 +42,34 @@
             <field name="report_name">Invoice_${(object.number or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}</field>
             <field name="lang">${object.partner_id.lang}</field>
             <field name="user_signature" eval="False"/>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="email_template_season_start" model="mail.template">
+            <field name="name">Correo de inicio de temporada</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="partner_to">${object.id}</field>
+            <field name="subject">Pronto empieza la temporada ${datetime.date.today().year}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Hola ${object.name}:
+                        <br />
+                        Ya llega el buen tiempo y con él empieza la preparación para una nueva temporada de balonmano playa.<br />
+                        <br /><br />
+                        En el Rayito Salinero te estamos esperando un año más para vivir la mejor experiencia del verano.
+                        Recuerda iniciar sesión en nuestra web, ir a Mi Cuenta y Editar tu Información personal, para marcar la casilla
+                        Confirmo mi participación en la temporada de este año.
+                        Una vez guardes estos cambios contaremos contigo.
+                        <br /><br />
+                        ¡Nos vemos en la arena!
+                    </p>
+                </div>
+            </field>
+            <field name="report_name">Inicio de temporada ${datetime.date.today().year}</field>
+            <field name="lang">${object.lang}</field>
+            <field name="user_signature" eval="True"/>
             <field name="auto_delete" eval="True"/>
         </record>
 

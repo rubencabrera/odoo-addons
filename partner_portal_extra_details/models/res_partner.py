@@ -29,6 +29,21 @@ class ResPartner(models.Model):
         help="Allows to know if the user has attached the receipt of payment."
     )
 
+    current_year_confirmed = fields.Boolean(
+        string="Confirmación de alta en la temporada."
+    )
+
+    is_player = fields.Boolean(
+        string="Es Jugador/a",
+        help="Marca esta casilla si este contacto es de un(a) jugador(a)"
+    )
+
+    player_category = fields.Char(
+        string='Player category',
+        compute='_compute_player_category',
+        store=True,
+    )
+
     shirt_size = fields.Selection(
         string="Talla de camiseta",
         selection=[
@@ -68,11 +83,13 @@ class ResPartner(models.Model):
         string="Validate receipt",
         help="Allows to validate the attachment receipt."
     )
-    player_category = fields.Char(
-        string='Player category',
-        compute='_compute_player_category',
-        store=True,
-    )
+
+    @api.model
+    def restore_current_year_confirmation(self):
+        """
+        Restaurar la confirmación de participación del presente año.
+        """
+        pass
 
     @api.multi
     def write(self, values):
@@ -86,7 +103,10 @@ class ResPartner(models.Model):
     @api.multi
     def _send_mail_to_new_validate_user(self):
         """
-        This function sends an email to the new validated user of the portal.
+        Envía un correo a un usuario que acaba de ser validado para usar
+        el portal. Este correo de bienvenida sólo estaba pensado para
+        enviarse una vez, no cada año, pero lo usamos en 2022 como correo
+        de inicio de temporada.
         """
         self.ensure_one()
         account_invoice = invoices = self.env['account.invoice']
@@ -100,6 +120,48 @@ class ResPartner(models.Model):
         if not invoices:
             invoices |= self._create_partner_invoice()
         invoices._send_payment_terms_mail()
+
+    @api.model
+    def _filter_players(self):
+        """
+        Function to select which partners to send the season start
+        email to.
+        """
+        return self.search(
+            [
+                ('is_player', '=', True),
+            ]
+        )
+
+    @api.model
+    def season_start(self):
+        """
+        Filter and send season start emails.
+
+        Designed to run from a Cronjob.
+        """
+        players = self._filter_players()
+        if players:
+            for player in players:
+                _logger.debug("Enviando correo a %s", player.name)
+                player._send_season_start_email()
+
+    @api.multi
+    def _send_season_start_email(self):
+        """
+        Function to send the season start email using the
+        company template.
+
+        Called from records, expects singleton (template does so we
+        carry that).
+        """
+        self.ensure_one()
+        # TODO: there's no default set, some error handling should be added
+        template = self.company_id.initial_template
+        template.send_mail(
+            self.id,
+            force_send=True  # sends it NOW
+        )
 
     def _create_partner_invoice(self):
         self.ensure_one()
@@ -158,6 +220,11 @@ class ResPartner(models.Model):
         return portal_wizard.action_apply()
 
     def _send_validate_mail(self):
+        """
+        Envía un correo de validación. Es el correo de bienvenida de cada temporada.
+
+        Inicialmente se invoca desde la función write() cuando se ha validado el recibo.
+        """
         self.ensure_one()
         partner = self
         module_name = 'partner_portal_extra_details'

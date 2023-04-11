@@ -53,12 +53,21 @@
 				<input id="birthdate_date" placeholder="YYYY-MM-DD" type="date" name="birthdate_date" t-attf-class="form-control #{error.get('birthdate_date') and 'is-invalid' or ''} o_datepicker_input o_website_form_date" t-att-value="birthdate_date or partner.birthdate_date"/>
             </div>
         </xpath>
+
         <xpath expr="//label[@for='company_name']/parent::div" position="replace">
         </xpath>
+
         <xpath expr="//label[@for='vat']/parent::div" position="replace">
             <div t-attf-class="form-group #{error.get('vat') and 'o_has_error' or ''} col-xl-6">
 				<label class="col-form-label" for="vat" placeholder="01234567Z o X1234567L">DNI o NIE</label>
                 <input type="text" name="vat" t-attf-class="form-control #{error.get('vat') and 'is-invalid' or ''}" t-att-value="vat or partner.vat"/>
+            </div>
+        </xpath>
+
+        <xpath expr="//label[@for='state_id']/parent::div" position="after">
+            <div t-attf-class="form-group #{error.get('current_year_confirmed') and 'o_has_error' or ''} col-xl-6">
+				<label class="col-form-label" for="current_year_confirmed">Confirmo mi participación en la temporada de este año</label>
+                    <input t-att-checked="'checked' if partner.current_year_confirmed else null" t-att-value="partner.current_year_confirmed" id="current_year_confirmed" type="checkbox" name="current_year_confirmed" t-attf-class="form-control #{error.get('current_year_confirmed') and 'is-invalid'}"/>
             </div>
         </xpath>
     </template>

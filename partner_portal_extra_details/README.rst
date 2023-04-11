@@ -3,7 +3,7 @@ Contact portal extra details
 ============================
 
 This module extends the user portal details with fields required by a sports
-team. 
+team and adds some functionality for management.
 
 **Table of contents**
 
@@ -24,6 +24,10 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 
 Do not contact contributors directly about support or help with technical issues.
 
+Roadmap
+=======
+
+- Make the season start date a variable.
 Credits
 =======
 

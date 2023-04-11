@@ -10,9 +10,11 @@
                 <field name='tutor_name'/>
             </xpath>
             <xpath expr="//field[@name='vat']" position="after">
+                <field name='is_player' />
                 <field name='validate_portal_user' />
                 <field name='valid_receipt' />
                 <field name='attach_receipt' />
+                <field name='current_year_confirmed' />
             </xpath>
             <xpath expr="//group[@name='personal_information_group']">
                 <field name='shirt_size' />
