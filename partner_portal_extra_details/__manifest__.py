@@ -28,6 +28,7 @@
         "data/product_template_data.xml",
         "data/mail_template_data.xml",
         "data/ir_cron_data.xml",
+        "data/season_start_cron.xml",
         #views
         "views/portal_templates.xml",
         "views/res_partner.xml",

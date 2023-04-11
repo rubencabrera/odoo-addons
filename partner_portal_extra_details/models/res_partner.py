@@ -34,7 +34,7 @@ class ResPartner(models.Model):
     )
 
     is_player = fields.Boolean(
-        string="Jugador/a",
+        string="Es Jugador/a",
         help="Marca esta casilla si este contacto es de un(a) jugador(a)"
     )
 
@@ -120,6 +120,48 @@ class ResPartner(models.Model):
         if not invoices:
             invoices |= self._create_partner_invoice()
         invoices._send_payment_terms_mail()
+
+    @api.model
+    def _filter_players(self):
+        """
+        Function to select which partners to send the season start
+        email to.
+        """
+        return self.search(
+            [
+                ('is_player', '=', True),
+            ]
+        )
+
+    @api.model
+    def season_start(self):
+        """
+        Filter and send season start emails.
+
+        Designed to run from a Cronjob.
+        """
+        players = self._filter_players()
+        if players:
+            for player in players:
+                _logger.debug("Enviando correo a %s", player.name)
+                player._send_season_start_email()
+
+    @api.multi
+    def _send_season_start_email(self):
+        """
+        Function to send the season start email using the
+        company template.
+
+        Called from records, expects singleton (template does so we
+        carry that).
+        """
+        self.ensure_one()
+        # TODO: there's no default set, some error handling should be added
+        template = self.company_id.initial_template
+        template.send_mail(
+            self.id,
+            force_send=True  # sends it NOW
+        )
 
     def _create_partner_invoice(self):
         self.ensure_one()

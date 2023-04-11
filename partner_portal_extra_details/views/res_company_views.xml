@@ -12,6 +12,7 @@
                             <field name="product_id" domain="[('type','=', 'service')]"/>
                             <field name="payment_reminder_days"/>
                             <field name="initial_template"/>
+                            <field name="season_start"/>
                         </group>
                     </group>
                 </page>

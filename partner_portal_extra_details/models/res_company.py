@@ -21,5 +21,15 @@ class ResCompany(models.Model):
 
     product_id = fields.Many2one(
         comodel_name="product.product",
-        string="Service to invoice"
+        string="Servicio a facturar",
+        helps="El producto de tipo servicio que se usará para generar las facturas de cuota."
+    )
+
+    season_start = fields.Date(
+        string="Fecha de inicio próxima temporada",
+        help="""Fecha en la que se reiniciarán las casillas de participación en
+        la presente temporada y se enviarán los emails de notificación a los
+        jugadores. Esta fecha debe cambiarse cada año para que el proceso se
+        repita.
+        """
     )
