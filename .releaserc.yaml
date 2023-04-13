@@ -1,0 +1,10 @@
+plugins:
+    - "@semantic-release/github"
+branches:
+    - main
+verifyConditions:
+    - "@semantic-release/github"
+publish:
+    - "@semantic-release/github"
+fail:
+    - "@semantic-release/github"
