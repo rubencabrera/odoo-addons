@@ -4,7 +4,7 @@
     "master"
   ],
   "debug": true,
-  "fail": { "@semantic-release/github" },
+  "fail": ["@semantic-release/github"],
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
@@ -20,8 +20,8 @@
     ],
     "@semantic-release/github"
   ],
-  "publish": { "@semantic-release/github" },
+  "publish": [ "@semantic-release/github" ],
   "repositoryUrl": "https://github.com/rubencabrera/odoo-addons.git",
   "tagFormat": "${version}",
-  "verifyConditions": { "@semantic-release/github" }
+  "verifyConditions": [ "@semantic-release/github" ]
 }
