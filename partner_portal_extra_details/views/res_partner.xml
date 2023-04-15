@@ -56,7 +56,7 @@
                     domain="[('is_player','=',True)]"
                 />
                 <filter name="pending_review" string="Usuarios pendientes de validar"
-                    domain="[('current_year_confirmed','=',True),('validate_portal_user','=',True)]"
+                    domain="[('validate_portal_user','=',False)]"
                 />
                 <filter name="current_year" string="Jugadores con alta este año confirmada"
                     domain="[('is_player','=',True), ('current_year_confirmed','=',True)]"
