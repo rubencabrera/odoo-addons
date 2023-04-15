@@ -3,7 +3,6 @@
     "12",
     "master"
   ],
-  "debug": true,
   "fail": ["@semantic-release/github"],
   "plugins": [
     [
