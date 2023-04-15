@@ -134,4 +134,3 @@ class RayitoCustomerPortal(CustomerPortal):
             self._set_partner_data()
             return request.redirect('/my')
         return response
-

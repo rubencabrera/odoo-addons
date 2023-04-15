@@ -33,6 +33,7 @@
             <xpath expr="//field[@name='display_name']" position="after">
                 <field name='birthdate_date'/>
                 <field name='vat'/>
+                <field name="current_year_confirmed" />
                 <field name="uniform_number" />
                 <field name='attach_receipt' />
             </xpath>
@@ -45,12 +46,24 @@
         <field name="inherit_id" ref="base.view_res_partner_filter"/>
         <field name="arch" type="xml">
             <xpath expr="//filter[@name='salesperson']" position="before">
-                <filter name="category" string="Category" context="{'group_by': 'player_category'}"/>
+                <filter name="category" string="Category"
+                    context="{'group_by': 'player_category'}"
+                    domain="[('is_player','=',True)]"
+                    />
             </xpath>
             <xpath expr="//separator[1]" position="after">
-                <filter name="unpaid" string="Validado sin pagar"
+                <filter name="is_player" string="Jugadores"
+                    domain="[('is_player','=',True)]"
+                />
+                <filter name="pending_review" string="Usuarios pendientes de validar"
+                    domain="[('current_year_confirmed','=',True),('validate_portal_user','=',True)]"
+                />
+                <filter name="current_year" string="Jugadores con alta este año confirmada"
+                    domain="[('is_player','=',True), ('current_year_confirmed','=',True)]"
+                />
+                <filter name="unpaid" string="Falta subir recibo"
                     domain="[('validate_portal_user','=',True), ('attach_receipt','=',False)]"/>
-                <filter name="pending" string="Recibo por validar"
+                <filter name="pending" string="Recibo subido pendiente de validar"
                     domain="[('valid_receipt','=',False), ('attach_receipt','=',True)]"/>
                 <separator />
             </xpath>
