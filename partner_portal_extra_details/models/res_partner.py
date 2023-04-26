@@ -4,6 +4,7 @@
 
 import logging
 
+from datetime import date
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
@@ -133,8 +134,13 @@ class ResPartner(models.Model):
             account_invoice = invoices = self.env['account.invoice']
             dom = [
                 ('partner_id', '=', partner.id),
-                ('state', '=', 'draft')
+                (
+                    'date_invoice',
+                    '>=',
+                    date(date.today().year, 1, 1).strftime("%Y-%m-%d")
+                )
             ]
+            _logger.debug("Domain: %s", dom)
             invoices |= account_invoice.search(
                 dom, order='date_invoice asc', limit=1
             )
