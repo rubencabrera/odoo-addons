@@ -92,10 +92,27 @@ class ResPartner(models.Model):
         """
         pass
 
+    def has_invoice_this_year(self, partner_id):
+        account_invoice = invoices = self.env['account.invoice']
+        dom = [
+            ('partner_id', '=', partner_id),
+            (
+                'date_invoice',
+                '>=',
+                date(date.today().year, 1, 1).strftime("%Y-%m-%d")
+            )
+        ]
+        _logger.debug("Domain: %s", dom)
+        invoices |= account_invoice.search(
+            dom, order='date_invoice asc', limit=1
+        )
+        return False if not invoices else True
+
+
     @api.multi
     def write(self, values):
         for partner in self:
-            if values.get("current_year_confirmed"):
+            if values.get("current_year_confirmed") and not self.has_invoice_this_year(partner.id):
                 if partner.validate_portal_user:
                     partner._send_mail_to_new_validate_user()
                 elif values.get("validate_portal_user"):
@@ -105,7 +122,7 @@ class ResPartner(models.Model):
                     partner._send_mail_to_new_validate_user()
                     partner._grant_portal_access()
 
-            elif values.get('validate_portal_user'):
+            elif values.get('validate_portal_user') and not self.has_invoice_this_year(partner.id):
                 # Usuario nuevo, al que hemos validado manualmente desde
                 # administración y al que vamos a mandar el email.
                 partner.is_player = True
@@ -131,22 +148,9 @@ class ResPartner(models.Model):
         """
         #  self.ensure_one()
         for partner in self:
-            account_invoice = invoices = self.env['account.invoice']
-            dom = [
-                ('partner_id', '=', partner.id),
-                (
-                    'date_invoice',
-                    '>=',
-                    date(date.today().year, 1, 1).strftime("%Y-%m-%d")
-                )
-            ]
-            _logger.debug("Domain: %s", dom)
-            invoices |= account_invoice.search(
-                dom, order='date_invoice asc', limit=1
-            )
-            if not invoices:
-                invoices |= partner._create_partner_invoice()
-            invoices._send_payment_terms_mail()
+            if not self.has_invoice_this_year(partner.id):
+                invoice = partner._create_partner_invoice()
+            invoice._send_payment_terms_mail()
 
     @api.model
     def _filter_players(self):
