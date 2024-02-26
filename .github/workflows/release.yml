@@ -2,12 +2,10 @@ name: Semantic Release
 
 on:
   push:
-    branches:
-      - master
-      - 12
+
 jobs:
-  release:
-    name: Release
+  semantic-release:
+    name: Semantic Release
     permissions:
       contents: write
       issues: write
@@ -19,11 +17,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Semantic Release
-        id: semantic
+        id: semrel
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        uses: cycjimmy/semantic-release-action@v3
-        with:
-          extra_plugins: |
-            @semantic-release/commit-analyzer
-            @semantic-release/git
+        uses: cycjimmy/semantic-release-action@v4
