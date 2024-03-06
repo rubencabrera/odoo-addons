@@ -108,11 +108,13 @@ class ResPartner(models.Model):
         )
         return False if not invoices else True
 
-
     @api.multi
     def write(self, values):
         for partner in self:
-            if values.get("current_year_confirmed") and not self.has_invoice_this_year(partner.id):
+            if (
+                values.get("current_year_confirmed") and
+                not self.has_invoice_this_year(partner.id)
+            ):
                 if partner.validate_portal_user:
                     partner._send_mail_to_new_validate_user()
                 elif values.get("validate_portal_user"):
@@ -122,7 +124,10 @@ class ResPartner(models.Model):
                     partner._send_mail_to_new_validate_user()
                     partner._grant_portal_access()
 
-            elif values.get('validate_portal_user') and not self.has_invoice_this_year(partner.id):
+            elif (
+                values.get('validate_portal_user') and
+                not self.has_invoice_this_year(partner.id)
+            ):
                 # Usuario nuevo, al que hemos validado manualmente desde
                 # administración y al que vamos a mandar el email.
                 partner.is_player = True
@@ -252,9 +257,10 @@ class ResPartner(models.Model):
 
     def _send_validate_mail(self):
         """
-        Envía un correo de validación. Es el correo de bienvenida de cada temporada.
-
-        Inicialmente se invoca desde la función write() cuando se ha validado el recibo.
+        Envía un correo de validación. Es el correo de bienvenida de
+        cada temporada.
+        Inicialmente se invoca desde la función write() cuando se ha
+        validado el recibo.
         """
         self.ensure_one()
         partner = self
