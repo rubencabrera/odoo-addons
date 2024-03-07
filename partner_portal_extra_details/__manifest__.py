@@ -24,16 +24,17 @@
         "l10n_es",
     ],
     "data": [
-        #datas
+        # datas
         "data/product_template_data.xml",
         "data/mail_template_data.xml",
         "data/ir_cron_data.xml",
         "data/season_start_cron.xml",
-        #views
+        "data/restore_season_confirmation_cron.xml",
+        # views
         "views/portal_templates.xml",
         "views/res_partner.xml",
         "views/res_company_views.xml",
-        #wizard
+        # wizard
         "wizard/automatic_partner_invoice.xml",
     ],
 }

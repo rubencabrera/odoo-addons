@@ -90,7 +90,15 @@ class ResPartner(models.Model):
         """
         Restaurar la confirmación de participación del presente año.
         """
-        pass
+        players = self._filter_players()
+        _logger.debug("Restaurando temporada para todos los jugadores")
+        players.write(
+            {
+                "attach_receipt": False,
+                "current_year_confirmed": False,
+                "valid_receipt": False,
+            }
+        )
 
     def has_invoice_this_year(self, partner_id):
         account_invoice = invoices = self.env['account.invoice']
@@ -151,7 +159,6 @@ class ResPartner(models.Model):
         enviarse una vez, no cada año, pero lo usamos en 2022 como correo
         de inicio de temporada.
         """
-        #  self.ensure_one()
         for partner in self:
             if not self.has_invoice_this_year(partner.id):
                 invoice = partner._create_partner_invoice()
@@ -165,7 +172,9 @@ class ResPartner(models.Model):
         """
         return self.search(
             [
+                '&',
                 ('is_player', '=', True),
+                ('active', '=', True),
             ]
         )
 
