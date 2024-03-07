@@ -90,7 +90,15 @@ class ResPartner(models.Model):
         """
         Restaurar la confirmación de participación del presente año.
         """
-        pass
+        players = self._filter_players()
+        _logger.debug("Restaurando temporada para todos los jugadores")
+        players.write(
+            {
+                "attach_receipt": False,
+                "current_year_confirmed": False,
+                "valid_receipt": False,
+            }
+        )
 
     def has_invoice_this_year(self, partner_id):
         account_invoice = invoices = self.env['account.invoice']
@@ -108,11 +116,13 @@ class ResPartner(models.Model):
         )
         return False if not invoices else True
 
-
     @api.multi
     def write(self, values):
         for partner in self:
-            if values.get("current_year_confirmed") and not self.has_invoice_this_year(partner.id):
+            if (
+                values.get("current_year_confirmed") and
+                not self.has_invoice_this_year(partner.id)
+            ):
                 if partner.validate_portal_user:
                     partner._send_mail_to_new_validate_user()
                 elif values.get("validate_portal_user"):
@@ -122,7 +132,10 @@ class ResPartner(models.Model):
                     partner._send_mail_to_new_validate_user()
                     partner._grant_portal_access()
 
-            elif values.get('validate_portal_user') and not self.has_invoice_this_year(partner.id):
+            elif (
+                values.get('validate_portal_user') and
+                not self.has_invoice_this_year(partner.id)
+            ):
                 # Usuario nuevo, al que hemos validado manualmente desde
                 # administración y al que vamos a mandar el email.
                 partner.is_player = True
@@ -146,7 +159,6 @@ class ResPartner(models.Model):
         enviarse una vez, no cada año, pero lo usamos en 2022 como correo
         de inicio de temporada.
         """
-        #  self.ensure_one()
         for partner in self:
             if not self.has_invoice_this_year(partner.id):
                 invoice = partner._create_partner_invoice()
@@ -160,7 +172,9 @@ class ResPartner(models.Model):
         """
         return self.search(
             [
+                '&',
                 ('is_player', '=', True),
+                ('active', '=', True),
             ]
         )
 
@@ -252,9 +266,10 @@ class ResPartner(models.Model):
 
     def _send_validate_mail(self):
         """
-        Envía un correo de validación. Es el correo de bienvenida de cada temporada.
-
-        Inicialmente se invoca desde la función write() cuando se ha validado el recibo.
+        Envía un correo de validación. Es el correo de bienvenida de
+        cada temporada.
+        Inicialmente se invoca desde la función write() cuando se ha
+        validado el recibo.
         """
         self.ensure_one()
         partner = self
