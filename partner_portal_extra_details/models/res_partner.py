@@ -277,7 +277,7 @@ class ResPartner(models.Model):
         template = self.env.ref(
             "%s.email_template_send_user_valid_receipt" % module_name
         )
-        template.send_mail(partner.id, force_send=True)
+        template.send_mail(partner.id)
 
     @api.model
     def compute_player_category(self):
